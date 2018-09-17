@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/getSnapshotJSONFile.js"],"names":["path","join","__dirname"],"mappings":";;;;;;AAAA;;;;;;kBACe;AAAA,SAAMA,eAAKC,IAAL,CAAUC,SAAV,EAAqB,mBAArB,CAAN;AAAA,C","file":"getSnapshotJSONFile.js","sourcesContent":["import path from \"path\";\nexport default () => path.join(__dirname, \"../snapshots.json\");\n"]}
