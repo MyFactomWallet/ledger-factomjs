@@ -8,12 +8,12 @@ const nacl = require('tweetnacl/nacl-fast').sign
 
 const cli = new FactomCli({
             host: 'courtesy-node.factom.com',
-	    port: 80,
+	    port: 443,
 	    path: '/v2', // Path to V2 API. Default to /v2
 	    debugPath: '/debug', // Path to debug API. Default to /debug
 	    user: 'paul', // RPC basic authentication
 	    password: 'pwd',
-	    protocol: 'http', // http or https. Default to http
+	    protocol: 'https', // http or https. Default to http
 	    rejectUnauthorized: true, // Set to false to allow connection to a node with a self-signed certificate
 	    retry: {
               retries: 4,
@@ -97,6 +97,13 @@ export default async transport => {
   console.log('reveal:')
   console.log(out['reveal'].toString('hex'))
   console.log('-------------========== Composed Chain ==========----------------')
+
+   if(nacl.detached.verify(ccbuffer, Buffer.from(result['s'],'hex'), Buffer.from(result['k'],'hex'))) {
+      console.log("Chain Commit Signature IS valid!!!")
+    } else {
+      console.log("Chain Commit Signature is NOT valid!!!")
+      throw("Invalid Chain Commit Signature")
+    }
 
 
   return out

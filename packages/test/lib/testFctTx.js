@@ -27,14 +27,14 @@ var _require2 = require('factom/src/factom-cli'),
 var nacl = require('tweetnacl/nacl-fast').sign;
 
 var cli = new FactomCli({
-  host: 'courtesy-node.factom.com',
-  port: 80,
+  //host: 'courtesy-node.factom.com',
+  host: 'localhost',
+  //port: 443,
+  port: 8088,
   path: '/v2', // Path to V2 API. Default to /v2
   debugPath: '/debug', // Path to debug API. Default to /debug
-  user: 'paul', // RPC basic authentication
-  password: 'pwd',
-  protocol: 'http', // http or https. Default to http
-  rejectUnauthorized: true, // Set to false to allow connection to a node with a self-signed certificate
+  protocol: 'https', // http or https. Default to http
+  rejectUnauthorized: false, // Set to false to allow connection to a node with a self-signed certificate
   retry: {
     retries: 4,
     factor: 2,
@@ -51,16 +51,13 @@ exports.default = function () {
           case 0:
             fct = new _hwAppFct2.default(transport);
             amount = 1000000;
-            _context.next = 4;
-            return cli.getEntryCreditRate();
+            ecRate = 65000; //await cli.getEntryCreditRate()
 
-          case 4:
-            ecRate = _context.sent;
             path = "44'/131'/0'/0'/0'";
-            _context.next = 8;
+            _context.next = 6;
             return fct.getAddress(path);
 
-          case 8:
+          case 6:
             addr = _context.sent;
             fromAddr = addr['address'];
             toAddr = 'FA3nr5r54AKBZ9SLABS3JyRoGcWMVMTkePW9MECKM8shMg2pMagn';
@@ -83,10 +80,10 @@ exports.default = function () {
             console.log(t.marshalBinarySig.toString('hex'));
             console.log('-------------========== TXN ==========----------------');
 
-            _context.next = 26;
+            _context.next = 24;
             return fct.signTransaction("44'/131'/0'/0'/0'", t.marshalBinarySig.toString('hex'));
 
-          case 26:
+          case 24:
             result = _context.sent;
 
 
@@ -95,18 +92,36 @@ exports.default = function () {
             console.log('-------------========== SIGNATURE ==========----------------');
 
             ts = Transaction.builder(t).rcdSignature(Buffer.from(result['r'], 'hex'), Buffer.from(result['s'], 'hex')).build();
+            i = 0;
 
-
-            for (i = 0; i < ts.signatures.length; ++i) {
-              if (nacl.detached.verify(ts.marshalBinarySig, ts.signatures[i], Buffer.from(ts.rcds[i], 1).slice(1))) {
-                console.log("SIGNATURE IS VALID!!");
-              } else {
-                console.log("SIGNATURE IS NOT VALID!");
-              }
+          case 30:
+            if (!(i < ts.signatures.length)) {
+              _context.next = 40;
+              break;
             }
+
+            if (!nacl.detached.verify(ts.marshalBinarySig, ts.signatures[i], Buffer.from(ts.rcds[i], 1).slice(1))) {
+              _context.next = 35;
+              break;
+            }
+
+            console.log("Transaction Signature is valid!!!");
+            _context.next = 37;
+            break;
+
+          case 35:
+            console.log("Transaction Signature is NOT valid!!!");
+            throw "Invalid Transaction Signature";
+
+          case 37:
+            ++i;
+            _context.next = 30;
+            break;
+
+          case 40:
             return _context.abrupt('return', result);
 
-          case 33:
+          case 41:
           case 'end':
             return _context.stop();
         }

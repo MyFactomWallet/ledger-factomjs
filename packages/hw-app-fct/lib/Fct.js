@@ -46,12 +46,15 @@ var Fct = function () {
     key: "getAddress",
     value: function getAddress(path, boolDisplay, boolChaincode) {
       var paths = (0, _utils.splitPath)(path);
-      var buffer = new Buffer(1 + paths.length * 4);
+      var buffer = new Buffer.alloc(1 + paths.length * 4);
       buffer[0] = paths.length;
       paths.forEach(function (element, index) {
         buffer.writeUInt32BE(element, 1 + 4 * index);
       });
+      console.log(paths);
       return this.transport.send(0xe0, 0x02, boolDisplay ? 0x01 : 0x00, boolChaincode ? 0x01 : 0x00, buffer).then(function (response) {
+
+        console.log("=======================================================");
         var result = {};
         var publicKeyLength = response[0];
         var addressLength = response[1 + publicKeyLength];
@@ -60,6 +63,7 @@ var Fct = function () {
         if (boolChaincode) {
           result.chainCode = response.slice(1 + publicKeyLength + 1 + addressLength, 1 + publicKeyLength + 1 + addressLength + 32).toString("hex");
         }
+        console.log(result);
         return result;
       });
     }

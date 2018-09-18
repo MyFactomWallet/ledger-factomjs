@@ -59,11 +59,12 @@ export default class Fct {
     chainCode?: string
   }> {
     let paths = splitPath(path);
-    let buffer = new Buffer(1 + paths.length * 4);
+    let buffer = new Buffer.alloc(1 + paths.length * 4);
     buffer[0] = paths.length;
     paths.forEach((element, index) => {
       buffer.writeUInt32BE(element, 1 + 4 * index);
     });
+console.log(paths)
     return this.transport
       .send(
         0xe0,
@@ -73,6 +74,8 @@ export default class Fct {
         buffer
       )
       .then(response => {
+
+console.log("=======================================================")
         let result = {};
         let publicKeyLength = response[0];
         let addressLength = response[1 + publicKeyLength];
@@ -94,6 +97,7 @@ export default class Fct {
             )
             .toString("hex");
         }
+console.log(result)
         return result;
       });
   }

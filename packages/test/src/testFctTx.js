@@ -4,18 +4,15 @@ const { FactomCli } = require('factom/src/factom-cli')
 const nacl = require('tweetnacl/nacl-fast').sign
 
 
-
-
-            
 const cli = new FactomCli({
-            host: 'courtesy-node.factom.com',
-	    port: 80,
+            //host: 'courtesy-node.factom.com',
+            host: 'localhost',
+	    //port: 443,
+	    port: 8088,
 	    path: '/v2', // Path to V2 API. Default to /v2
 	    debugPath: '/debug', // Path to debug API. Default to /debug
-	    user: 'paul', // RPC basic authentication
-	    password: 'pwd',
-	    protocol: 'http', // http or https. Default to http
-	    rejectUnauthorized: true, // Set to false to allow connection to a node with a self-signed certificate
+	    protocol: 'https', // http or https. Default to http
+	    rejectUnauthorized: false, // Set to false to allow connection to a node with a self-signed certificate
 	    retry: {
               retries: 4,
               factor: 2,
@@ -26,7 +23,7 @@ const cli = new FactomCli({
 export default async transport => {
   const fct = new Fct(transport);
   const amount = 1000000
-  const ecRate = await cli.getEntryCreditRate()
+  const ecRate = 65000 //await cli.getEntryCreditRate()
   const path = "44'/131'/0'/0'/0'"
   const addr = await fct.getAddress(path)
   const fromAddr = addr['address']
@@ -88,9 +85,10 @@ export default async transport => {
 
   for (let i = 0; i < ts.signatures.length; ++i) {
     if(nacl.detached.verify(ts.marshalBinarySig, ts.signatures[i], Buffer.from(ts.rcds[i], 1).slice(1))) {
-      console.log("SIGNATURE IS VALID!!")
+      console.log("Transaction Signature is valid!!!")
     } else {
-      console.log("SIGNATURE IS NOT VALID!")
+      console.log("Transaction Signature is NOT valid!!!")
+      throw("Invalid Transaction Signature")
     }
   }
   return result

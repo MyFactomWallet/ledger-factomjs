@@ -5,12 +5,12 @@ const nacl = require('tweetnacl/nacl-fast').sign
 
 const cli = new FactomCli({
             host: 'courtesy-node.factom.com',
-	    port: 80,
+	    port: 443,
 	    path: '/v2', // Path to V2 API. Default to /v2
 	    debugPath: '/debug', // Path to debug API. Default to /debug
 	    user: 'paul', // RPC basic authentication
 	    password: 'pwd',
-	    protocol: 'http', // http or https. Default to http
+	    protocol: 'https', // http or https. Default to http
 	    rejectUnauthorized: true, // Set to false to allow connection to a node with a self-signed certificate
 	    retry: {
               retries: 4,
@@ -45,11 +45,9 @@ function composeEntry(entry, ecpubkey, signature) {
     };
 }
 
-
-
 export default async transport => {
   const fct = new Fct(transport);
-  const ecRate = await cli.getEntryCreditRate()
+  const ecRate = 65000 //await cli.getEntryCreditRate()
   const path = "44'/132'/0'/0'/0'"
   const addr = await fct.getAddress(path)
   const fromAddr = addr['address']
@@ -78,6 +76,14 @@ export default async transport => {
   console.log('reveal:')
   console.log(out['reveal'].toString('hex'))
   console.log('-------------========== Compose Entry End ==========----------------')
+
+   if(nacl.detached.verify(ecbuffer, Buffer.from(result['s'],'hex'), Buffer.from(result['k'],'hex'))) {
+      console.log("Entry Commit Signature IS valid!!!")
+    } else {
+      console.log("Entry Commit Signature is NOT valid!!!")
+      throw("Invalid Entry Commit Signature")
+    }
+
 
   return out
 }

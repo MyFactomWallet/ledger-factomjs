@@ -30,12 +30,12 @@ var nacl = require('tweetnacl/nacl-fast').sign;
 
 var cli = new FactomCli({
     host: 'courtesy-node.factom.com',
-    port: 80,
+    port: 443,
     path: '/v2', // Path to V2 API. Default to /v2
     debugPath: '/debug', // Path to debug API. Default to /debug
     user: 'paul', // RPC basic authentication
     password: 'pwd',
-    protocol: 'http', // http or https. Default to http
+    protocol: 'https', // http or https. Default to http
     rejectUnauthorized: true, // Set to false to allow connection to a node with a self-signed certificate
     retry: {
         retries: 4,
@@ -78,16 +78,13 @@ exports.default = function () {
                 switch (_context.prev = _context.next) {
                     case 0:
                         fct = new _hwAppFct2.default(transport);
-                        _context.next = 3;
-                        return cli.getEntryCreditRate();
+                        ecRate = 65000; //await cli.getEntryCreditRate()
 
-                    case 3:
-                        ecRate = _context.sent;
                         path = "44'/132'/0'/0'/0'";
-                        _context.next = 7;
+                        _context.next = 5;
                         return fct.getAddress(path);
 
-                    case 7:
+                    case 5:
                         addr = _context.sent;
                         fromAddr = addr['address'];
                         entry = Entry.builder().chainId('954d5a49fd70d9b8bcdb35d252267829957f7ef7fa6c74f88419bdc5e82209f4').content('Hello Ledger').build();
@@ -98,10 +95,10 @@ exports.default = function () {
                         console.log(ecbuffer.toString('hex'));
                         console.log('-------------========== Entry Commit End ==========----------------');
 
-                        _context.next = 16;
+                        _context.next = 14;
                         return fct.signCommit(path, ecbuffer.toString('hex'), false);
 
-                    case 16:
+                    case 14:
                         result = _context.sent;
 
 
@@ -118,9 +115,23 @@ exports.default = function () {
                         console.log(out['reveal'].toString('hex'));
                         console.log('-------------========== Compose Entry End ==========----------------');
 
+                        if (!nacl.detached.verify(ecbuffer, Buffer.from(result['s'], 'hex'), Buffer.from(result['k'], 'hex'))) {
+                            _context.next = 29;
+                            break;
+                        }
+
+                        console.log("Entry Commit Signature IS valid!!!");
+                        _context.next = 31;
+                        break;
+
+                    case 29:
+                        console.log("Entry Commit Signature is NOT valid!!!");
+                        throw "Invalid Entry Commit Signature";
+
+                    case 31:
                         return _context.abrupt('return', out);
 
-                    case 28:
+                    case 32:
                     case 'end':
                         return _context.stop();
                 }
