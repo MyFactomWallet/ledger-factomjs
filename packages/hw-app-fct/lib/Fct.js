@@ -20,8 +20,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * MyFactomWallet Ledger API
  *
  * @example
- * import Eth from "@ledgerhq/hw-app-eth";
- * const eth = new Eth(transport)
+ * import Fct from "hw-app-fct";
+ * const fct = new Fct(transport)
  */
 var Fct = function () {
   function Fct(transport) {
@@ -39,6 +39,7 @@ var Fct = function () {
    * @return an object with a publicKey, address and (optionally) chainCode
    * @example
    * fct.getAddress("44'/131'/0'/0'/0'").then(o => o.address)
+   * fct.getAddress("44'/132'/0'/0'/0'").then(o => o.address)
    */
 
 
@@ -51,10 +52,8 @@ var Fct = function () {
       paths.forEach(function (element, index) {
         buffer.writeUInt32BE(element, 1 + 4 * index);
       });
-      console.log(paths);
       return this.transport.send(0xe0, 0x02, boolDisplay ? 0x01 : 0x00, boolChaincode ? 0x01 : 0x00, buffer).then(function (response) {
 
-        console.log("=======================================================");
         var result = {};
         var publicKeyLength = response[0];
         var addressLength = response[1 + publicKeyLength];
@@ -63,7 +62,6 @@ var Fct = function () {
         if (boolChaincode) {
           result.chainCode = response.slice(1 + publicKeyLength + 1 + addressLength, 1 + publicKeyLength + 1 + addressLength + 32).toString("hex");
         }
-        console.log(result);
         return result;
       });
     }
@@ -187,63 +185,6 @@ var Fct = function () {
         result.arbitraryDataEnabled = response[0] & 0x01;
         result.version = "" + response[1] + "." + response[2] + "." + response[3];
         return result;
-      });
-    }
-
-    /**
-    * You can sign a message according to eth_sign RPC call and retrieve v, r, s given the message and the BIP 32 path of the account to sign.
-    * @example
-    eth.signPersonalMessage("44'/60'/0'/0'/0", Buffer.from("test").toString("hex")).then(result => {
-    var v = result['v'] - 27;
-    v = v.toString(16);
-    if (v.length < 2) {
-      v = "0" + v;
-    }
-    console.log("Signature 0x" + result['r'] + result['s'] + v);
-    })
-     */
-
-  }, {
-    key: "signPersonalMessage",
-    value: function signPersonalMessage(path, messageHex) {
-      var _this3 = this;
-
-      var paths = (0, _utils.splitPath)(path);
-      var offset = 0;
-      var message = new Buffer(messageHex, "hex");
-      var toSend = [];
-      var response = void 0;
-
-      var _loop3 = function _loop3() {
-        var maxChunkSize = offset === 0 ? 150 - 1 - paths.length * 4 - 4 : 150;
-        var chunkSize = offset + maxChunkSize > message.length ? message.length - offset : maxChunkSize;
-        var buffer = new Buffer(offset === 0 ? 1 + paths.length * 4 + 4 + chunkSize : chunkSize);
-        if (offset === 0) {
-          buffer[0] = paths.length;
-          paths.forEach(function (element, index) {
-            buffer.writeUInt32BE(element, 1 + 4 * index);
-          });
-          buffer.writeUInt32BE(message.length, 1 + 4 * paths.length);
-          message.copy(buffer, 1 + 4 * paths.length + 4, offset, offset + chunkSize);
-        } else {
-          message.copy(buffer, 0, offset, offset + chunkSize);
-        }
-        toSend.push(buffer);
-        offset += chunkSize;
-      };
-
-      while (offset !== message.length) {
-        _loop3();
-      }
-      return (0, _utils.foreach)(toSend, function (data, i) {
-        return _this3.transport.send(0xe0, 0x08, i === 0 ? 0x00 : 0x80, 0x00, data).then(function (apduResponse) {
-          response = apduResponse;
-        });
-      }).then(function () {
-        var v = response[0];
-        var r = response.slice(1, 1 + 32).toString("hex");
-        var s = response.slice(1 + 32, 1 + 32 + 32).toString("hex");
-        return { v: v, r: r, s: s };
       });
     }
   }]);

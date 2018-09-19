@@ -61,12 +61,6 @@
                         #getAppConfiguration
                       </a></li>
                       
-                      <li><a
-                        href='#fctsignpersonalmessage'
-                        class='regular pre-open'>
-                        #signPersonalMessage
-                      </a></li>
-                      
                     </ul>
                   
                   
@@ -95,7 +89,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/0cbe7f75face2a37bf79fe0a94da7f768012d1d8/packages/hw-app-fct/src/Fct.js#L31-L299'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/5a84084e1152a462b870f95cd7e2bd28600568a7/packages/hw-app-fct/src/Fct.js#L31-L231'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -141,8 +135,8 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Eth <span class="hljs-keyword">from</span> <span class="hljs-string">"@ledgerhq/hw-app-eth"</span>;
-<span class="hljs-keyword">const</span> eth = <span class="hljs-keyword">new</span> Eth(transport)</pre>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Fct <span class="hljs-keyword">from</span> <span class="hljs-string">"hw-app-fct"</span>;
+<span class="hljs-keyword">const</span> fct = <span class="hljs-keyword">new</span> Fct(transport)</pre>
     
   
 
@@ -166,7 +160,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/0cbe7f75face2a37bf79fe0a94da7f768012d1d8/packages/hw-app-fct/src/Fct.js#L52-L103'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/5a84084e1152a462b870f95cd7e2bd28600568a7/packages/hw-app-fct/src/Fct.js#L53-L101'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -237,7 +231,8 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>fct.getAddress(<span class="hljs-string">"44'/131'/0'/0'/0'"</span>).then(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.address)</pre>
+      <pre class='p1 overflow-auto round fill-light'>fct.getAddress(<span class="hljs-string">"44'/131'/0'/0'/0'"</span>).then(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.address)
+fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.address)</pre>
     
   
 
@@ -265,7 +260,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/0cbe7f75face2a37bf79fe0a94da7f768012d1d8/packages/hw-app-fct/src/Fct.js#L110-L159'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/5a84084e1152a462b870f95cd7e2bd28600568a7/packages/hw-app-fct/src/Fct.js#L108-L157'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -352,7 +347,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/0cbe7f75face2a37bf79fe0a94da7f768012d1d8/packages/hw-app-fct/src/Fct.js#L166-L218'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/5a84084e1152a462b870f95cd7e2bd28600568a7/packages/hw-app-fct/src/Fct.js#L164-L216'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -447,7 +442,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/0cbe7f75face2a37bf79fe0a94da7f768012d1d8/packages/hw-app-fct/src/Fct.js#L222-L232'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/5a84084e1152a462b870f95cd7e2bd28600568a7/packages/hw-app-fct/src/Fct.js#L220-L230'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -480,100 +475,6 @@
 
   
 
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='fctsignpersonalmessage'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>signPersonalMessage(path, messageHex)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/0cbe7f75face2a37bf79fe0a94da7f768012d1d8/packages/hw-app-fct/src/Fct.js#L246-L298'>
-      <span>packages/hw-app-fct/src/Fct.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>You can sign a message according to eth_sign RPC call and retrieve v, r, s given the message and the BIP 32 path of the account to sign.</p>
-
-
-  <div class='pre p1 fill-light mt0'>signPersonalMessage(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, messageHex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>path</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>messageHex</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'>eth.signPersonalMessage(<span class="hljs-string">"44'/60'/0'/0'/0"</span>, Buffer.from(<span class="hljs-string">"test"</span>).toString(<span class="hljs-string">"hex"</span>)).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> {
-<span class="hljs-keyword">var</span> v = result[<span class="hljs-string">'v'</span>] - <span class="hljs-number">27</span>;
-v = v.toString(<span class="hljs-number">16</span>);
-<span class="hljs-keyword">if</span> (v.length &lt; <span class="hljs-number">2</span>) {
-v = <span class="hljs-string">"0"</span> + v;
-}
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Signature 0x"</span> + result[<span class="hljs-string">'r'</span>] + result[<span class="hljs-string">'s'</span>] + v);
-})</pre>
-    
   
 
   

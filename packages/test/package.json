@@ -9,7 +9,7 @@
     "@ledgerhq/hw-transport-node-hid": "^4.21.0",
     "@ledgerhq/hw-transport": "^4.21.0",
     "@ledgerhq/hw-transport-u2f": "^4.21.0",
-    "factom":"^0.3.3",
+    "factom":"^0.3.4-rc1",
     "tweetnacl": "^1.0.0",
     "budo": "^11.0.1"
   },

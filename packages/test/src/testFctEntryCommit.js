@@ -1,88 +1,58 @@
 import Fct from '@ledgerhq/hw-app-fct'
-const { Entry, validateEntryInstance, composeEntryReveal } = require( 'factom/src/entry' )
+
 const { FactomCli } = require('factom/src/factom-cli')
-const nacl = require('tweetnacl/nacl-fast').sign
+const { Entry, validateEntryInstance, composeEntry, composeEntryLedger } = require( 'factom/src/entry' )
 
 const cli = new FactomCli({
-            host: 'courtesy-node.factom.com',
-	    port: 443,
-	    path: '/v2', // Path to V2 API. Default to /v2
-	    debugPath: '/debug', // Path to debug API. Default to /debug
-	    user: 'paul', // RPC basic authentication
-	    password: 'pwd',
-	    protocol: 'https', // http or https. Default to http
-	    rejectUnauthorized: true, // Set to false to allow connection to a node with a self-signed certificate
-	    retry: {
-              retries: 4,
-              factor: 2,
-              minTimeout: 500,
-              maxTimeout: 2000
-            }})
-
-function composeEntryLedger(entry) {
-    const buffer = Buffer.alloc(40);
-
-    buffer.writeInt8(0);
-    buffer.writeIntBE(entry.timestamp || Date.now(), 1, 6);
-    entry.hash().copy(buffer, 7);
-    buffer.writeInt8(entry.ecCost(), 39);
-
-    return buffer;
-}
-
-function composeEntryCommit(entry, ecPublic, signature) {
-    validateEntryInstance(entry);
-    const buffer = composeEntryLedger(entry);
-    return Buffer.concat([buffer, ecPublic, signature]);
-}
-
-function composeEntry(entry, ecpubkey, signature) {
-    validateEntryInstance(entry);
-
-    return {
-        commit: composeEntryCommit(entry, ecpubkey, signature),
-        reveal: composeEntryReveal(entry)
-    };
-}
+  host: 'courtesy-node.factom.com',
+  port: 443,
+  path: '/v2', // Path to V2 API. Default to /v2
+  debugPath: '/debug', // Path to debug API. Default to /debug
+  user: 'paul', // RPC basic authentication
+  password: 'pwd',
+  protocol: 'https', // http or https. Default to http
+  rejectUnauthorized: true, // Set to false to allow connection to a node with a self-signed certificate
+  retry: {
+    retries: 4,
+    factor: 2,
+    minTimeout: 500,
+    maxTimeout: 2000
+  }
+})
 
 export default async transport => {
   const fct = new Fct(transport);
-  const ecRate = 65000 //await cli.getEntryCreditRate()
+  const ecRate = 24000 //await CORS... cli.getEntryCreditRate()
   const path = "44'/132'/0'/0'/0'"
   const addr = await fct.getAddress(path)
-  const fromAddr = addr['address']
+  const ecaddr = addr['address']
 
   const entry = Entry.builder()
     .chainId('954d5a49fd70d9b8bcdb35d252267829957f7ef7fa6c74f88419bdc5e82209f4')
     .content('Hello Ledger')
+    .timestamp(Date.now())
     .build();
 
   const ecbuffer = composeEntryLedger(entry)
 
-  console.log('-------------========== Entry Commit Begin ==========----------------')
+  console.log('========== Entry Commit Ledger Begin ==========')
   console.log(ecbuffer.toString('hex'))
-  console.log('-------------========== Entry Commit End ==========----------------')
+  console.log('========== Entry Commit Ledger End ==========')
 
-  const result = await fct.signCommit(path, ecbuffer.toString('hex'),false);
+  const result = await fct.signCommit(path, ecbuffer.toString('hex'),false)
 
-  console.log('-------------========== SIGNATURE ==========----------------')
+  console.log('========== Entry Commit Signature ==========')
   console.log(result)
-  console.log('-------------========== SIGNATURE ==========----------------')
+  console.log('========== Entry Commit Signature ==========')
 
-  const out = composeEntry(entry, Buffer.from(result['k'],'hex'), Buffer.from(result['s'],'hex'))
-  console.log('-------------========== Composed Entry Begin ==========----------------')
+  const out = composeEntry(entry, ecaddr, result['s'])
+
+  console.log('========== Composed Entry Begin ==========')
   console.log('commit:')
   console.log(out['commit'].toString('hex'))
   console.log('reveal:')
   console.log(out['reveal'].toString('hex'))
-  console.log('-------------========== Compose Entry End ==========----------------')
-
-   if(nacl.detached.verify(ecbuffer, Buffer.from(result['s'],'hex'), Buffer.from(result['k'],'hex'))) {
-      console.log("Entry Commit Signature IS valid!!!")
-    } else {
-      console.log("Entry Commit Signature is NOT valid!!!")
-      throw("Invalid Entry Commit Signature")
-    }
+  console.log('========== Compose Entry End ==========')
 
 
   return out

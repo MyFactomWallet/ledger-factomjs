@@ -51,7 +51,7 @@ exports.default = function () {
           case 0:
             fct = new _hwAppFct2.default(transport);
             amount = 1000000;
-            ecRate = 65000; //await cli.getEntryCreditRate()
+            ecRate = 24000; //await cli.getEntryCreditRate()
 
             path = "44'/131'/0'/0'/0'";
             _context.next = 6;

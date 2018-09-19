@@ -18,23 +18,18 @@ var _hwAppFct2 = _interopRequireDefault(_hwAppFct);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _require = require('factom/src/entry'),
-    Entry = _require.Entry;
+var _require = require('factom/src/factom-cli'),
+    FactomCli = _require.FactomCli;
 
-var _require2 = require('factom/src/factom-cli'),
-    FactomCli = _require2.FactomCli;
+var _require2 = require('factom/src/entry'),
+    Entry = _require2.Entry;
 
 var _require3 = require('factom/src/chain'),
     Chain = _require3.Chain,
     computeChainTxId = _require3.computeChainTxId,
     validateChainInstance = _require3.validateChainInstance,
-    composeChainReveal = _require3.composeChainReveal;
-
-var _require4 = require('factom/src/util'),
-    sha256 = _require4.sha256,
-    sha256d = _require4.sha256d;
-
-var nacl = require('tweetnacl/nacl-fast').sign;
+    composeChainLedger = _require3.composeChainLedger,
+    composeChain = _require3.composeChain;
 
 var cli = new FactomCli({
   host: 'courtesy-node.factom.com',
@@ -50,113 +45,61 @@ var cli = new FactomCli({
     factor: 2,
     minTimeout: 500,
     maxTimeout: 2000
-  } });
-
-//extracted from factom.Chain since it wasn't exported
-function composeChainLedger(chain) {
-  var firstEntry = chain.firstEntry;
-  var entryHash = firstEntry.hash();
-  var buffer = Buffer.alloc(104);
-
-  buffer.writeInt8(0);
-  buffer.writeIntBE(firstEntry.timestamp || Date.now(), 1, 6);
-  var chainIdHash = sha256d(chain.id);
-  chainIdHash.copy(buffer, 7);
-  var commitWeld = sha256d(Buffer.concat([entryHash, chain.id]));
-  commitWeld.copy(buffer, 39);
-  entryHash.copy(buffer, 71);
-  buffer.writeInt8(chain.ecCost(), 103);
-
-  return buffer;
-}
-
-//variant of factom.chain.composeChainCommit 
-function composeChainCommit(chain, ecpubkey, signature) {
-  validateChainInstance(chain);
-  var buffer = composeChainLedger(chain);
-  return Buffer.concat([buffer, ecpubkey, signature]);
-}
-
-//variant of factom.chain.composeChainCommit
-function composeChain(chain, ecpubkey, signature) {
-  validateChainInstance(chain);
-  return {
-    commit: composeChainCommit(chain, ecpubkey, signature),
-    reveal: composeChainReveal(chain)
-  };
-}
+  }
+});
 
 exports.default = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(transport) {
-    var fct, ecRate, path, addr, fromAddr, content, e, chain, txId, ccbuffer, result, out;
+    var fct, ecRate, path, addr, ecaddr, content, e, chain, txId, ccbuffer, result, out;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             fct = new _hwAppFct2.default(transport);
-            _context.next = 3;
-            return cli.getEntryCreditRate();
+            ecRate = 24000; //await CORS... cli.getEntryCreditRate()
 
-          case 3:
-            ecRate = _context.sent;
             path = "44'/132'/0'/0'/0'";
-            _context.next = 7;
+            _context.next = 5;
             return fct.getAddress(path);
 
-          case 7:
+          case 5:
             addr = _context.sent;
-            fromAddr = addr['address'];
+            ecaddr = addr['address'];
             content = 'Hello Ledger';
-            e = Entry.builder().extId('extId', 'utf8').extId('extId++', 'utf8').content(content, 'utf8').build();
-            //.timestamp(Date.now())
-
+            e = Entry.builder().extId('extId', 'utf8').extId('extId++', 'utf8').content(content, 'utf8').timestamp(Date.now()).build();
             chain = new Chain(e);
             txId = computeChainTxId(chain);
             ccbuffer = composeChainLedger(chain);
 
 
-            console.log('-------------========== Entry Commit Begin ==========----------------');
+            console.log('========== Chain Ledger Begin ==========');
             console.log(ccbuffer.toString('hex'));
-            console.log('-------------========== Entry Commit End ==========----------------');
+            console.log('========== Chain Ledger End ==========');
 
-            _context.next = 19;
+            _context.next = 17;
             return fct.signCommit(path, ccbuffer.toString('hex'), true);
 
-          case 19:
+          case 17:
             result = _context.sent;
 
 
-            console.log('-------------========== SIGNATURE ==========----------------');
+            console.log('========== Chain Commit Signature ==========');
             console.log(result);
-            console.log('-------------========== SIGNATURE ==========----------------');
+            console.log('========== Chain Commit Signature ==========');
 
-            out = composeChain(chain, Buffer.from(result['k'], 'hex'), Buffer.from(result['s'], 'hex'));
+            out = composeChain(chain, ecaddr, result['s']);
 
 
-            console.log('-------------========== Composed Chain ==========----------------');
+            console.log('========== Composed Chain Begin ==========');
             console.log('commit:');
             console.log(out['commit'].toString('hex'));
             console.log('reveal:');
             console.log(out['reveal'].toString('hex'));
-            console.log('-------------========== Composed Chain ==========----------------');
+            console.log('========== Composed Chain End ==========');
 
-            if (!nacl.detached.verify(ccbuffer, Buffer.from(result['s'], 'hex'), Buffer.from(result['k'], 'hex'))) {
-              _context.next = 34;
-              break;
-            }
-
-            console.log("Chain Commit Signature IS valid!!!");
-            _context.next = 36;
-            break;
-
-          case 34:
-            console.log("Chain Commit Signature is NOT valid!!!");
-            throw "Invalid Chain Commit Signature";
-
-          case 36:
             return _context.abrupt('return', out);
 
-          case 37:
+          case 29:
           case 'end':
             return _context.stop();
         }
