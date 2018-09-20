@@ -1,4 +1,4 @@
-import Fct from "@ledgerhq/hw-app-fct";
+import Fct from "@factoid.org/hw-app-fct";
 
 export default async transport => {
   const fct = new Fct(transport);

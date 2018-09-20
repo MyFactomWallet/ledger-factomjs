@@ -1,4 +1,4 @@
-import Fct from '@ledgerhq/hw-app-fct'
+import Fct from '@factoid.org/hw-app-fct'
 const { Transaction} = require( 'factom/src/transaction' )
 const { FactomCli } = require('factom/src/factom-cli')
 const nacl = require('tweetnacl/nacl-fast').sign

@@ -208,8 +208,5 @@ var Fct = function () {
       ********************************************************************************/
 
 
-// FIXME drop:
-
-
 exports.default = Fct;
 //# sourceMappingURL=Fct.js.map

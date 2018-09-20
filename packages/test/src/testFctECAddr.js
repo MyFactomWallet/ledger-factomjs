@@ -1,4 +1,4 @@
-import Fct from "@ledgerhq/hw-app-fct";
+import Fct from "@factoid.org/hw-app-fct";
 import assert from 'assert'
 
 const address = require('factom/src/addresses');

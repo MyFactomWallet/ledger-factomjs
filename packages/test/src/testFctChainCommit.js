@@ -1,4 +1,4 @@
-import Fct from '@ledgerhq/hw-app-fct'
+import Fct from '@factoid.org/hw-app-fct'
 const { FactomCli } = require('factom/src/factom-cli')
 const { Entry } = require( 'factom/src/entry' )
 const { Chain, computeChainTxId, validateChainInstance, composeChainLedger, composeChain } = require( 'factom/src/chain' )

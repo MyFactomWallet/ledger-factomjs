@@ -17,7 +17,6 @@
  ********************************************************************************/
 //@flow
 
-// FIXME drop:
 import { splitPath, foreach } from "./utils";
 import type Transport from "@ledgerhq/hw-transport";
 

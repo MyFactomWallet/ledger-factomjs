@@ -12,7 +12,7 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _hwAppFct = require('@ledgerhq/hw-app-fct');
+var _hwAppFct = require('@factoid.org/hw-app-fct');
 
 var _hwAppFct2 = _interopRequireDefault(_hwAppFct);
 
