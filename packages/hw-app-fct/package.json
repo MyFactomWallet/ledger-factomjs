@@ -1,6 +1,6 @@
 {
-  "name": "@ledgerhq/hw-app-fct",
-  "version": "4.2.0",
+  "name": "@factoid.org/hw-app-fct",
+  "version": "0.4.2",
   "description": "Ledger Hardware Wallet Factom Application API",
   "keywords": [
     "Ledger",
@@ -13,12 +13,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/LedgerHQ/ledgerjs"
+    "url": "https://github.com/MyFactomWallet/ledger-factomjs"
   },
   "bugs": {
-    "url": "https://github.com/LedgerHQ/ledgerjs/issues"
+    "url": "https://github.com/MyFactomWallet/ledger-factomjs/issues"
   },
-  "homepage": "https://github.com/LedgerHQ/ledgerjs",
+  "homepage": "https://github.com/MyFactomWallet/ledger-factomjs",
   "publishConfig": {
     "access": "public"
   },
