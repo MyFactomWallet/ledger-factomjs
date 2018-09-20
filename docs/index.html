@@ -89,7 +89,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3f41f46f8dd23e0ef94d52d9fb851dfa78e29385/packages/hw-app-fct/src/Fct.js#L30-L230'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3651f0fb2a8a353493ec42fe90828a1216efde9c/packages/hw-app-fct/src/Fct.js#L30-L224'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -135,7 +135,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Fct <span class="hljs-keyword">from</span> <span class="hljs-string">"hw-app-fct"</span>;
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> Fct <span class="hljs-keyword">from</span> <span class="hljs-string">"@factoid.org/hw-app-fct"</span>;
 <span class="hljs-keyword">const</span> fct = <span class="hljs-keyword">new</span> Fct(transport)</pre>
     
   
@@ -150,7 +150,7 @@
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>getAddress(path, boolDisplay, boolChaincode)</span>
+            <span class='code strong strong truncate'>getAddress(path, boolDisplay)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -160,7 +160,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3f41f46f8dd23e0ef94d52d9fb851dfa78e29385/packages/hw-app-fct/src/Fct.js#L52-L100'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3651f0fb2a8a353493ec42fe90828a1216efde9c/packages/hw-app-fct/src/Fct.js#L51-L89'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -170,7 +170,7 @@
   <p>get Factom address for a given BIP 32 path.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getAddress(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, boolDisplay: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, boolChaincode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{publicKey: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, address: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chainCode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?}></div>
+  <div class='pre p1 fill-light mt0'>getAddress(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, boolDisplay: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{publicKey: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, address: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
   
   
 
@@ -202,14 +202,6 @@
           
         </div>
       
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>boolChaincode</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
-	    
-          </div>
-          
-        </div>
-      
     </div>
   
 
@@ -218,8 +210,8 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{publicKey: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, address: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chainCode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?}></code>:
-        an object with a publicKey, address and (optionally) chainCode
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{publicKey: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, address: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>:
+        an object with a publicKey and address
 
       
     
@@ -231,8 +223,8 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>fct.getAddress(<span class="hljs-string">"44'/131'/0'/0'/0'"</span>).then(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.address)
-fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> o.address)</pre>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> fctaddr = <span class="hljs-keyword">await</span> fct.getAddress(<span class="hljs-string">"44'/131'/0'/0'/0'"</span>)
+<span class="hljs-keyword">const</span> ecaddr = <span class="hljs-keyword">await</span> fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>)</pre>
     
   
 
@@ -260,7 +252,7 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3f41f46f8dd23e0ef94d52d9fb851dfa78e29385/packages/hw-app-fct/src/Fct.js#L107-L156'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3651f0fb2a8a353493ec42fe90828a1216efde9c/packages/hw-app-fct/src/Fct.js#L98-L147'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -288,7 +280,8 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>path</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
+	    a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
+
           </div>
           
         </div>
@@ -296,7 +289,8 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>rawTxHex</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
+	    The raw fct transaction request
+
           </div>
           
         </div>
@@ -319,7 +313,7 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>fct.signTransaction(<span class="hljs-string">"44'/131'/0'/0'/0'"</span>, <span class="hljs-string">"02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f"</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> fct.signTransaction(<span class="hljs-string">"44'/131'/0'/0'/0'"</span>, <span class="hljs-string">"02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f"</span>)</pre>
     
   
 
@@ -347,7 +341,7 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3f41f46f8dd23e0ef94d52d9fb851dfa78e29385/packages/hw-app-fct/src/Fct.js#L163-L215'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3651f0fb2a8a353493ec42fe90828a1216efde9c/packages/hw-app-fct/src/Fct.js#L157-L209'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -375,7 +369,8 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>path</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
+	    a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
+
           </div>
           
         </div>
@@ -383,7 +378,8 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>rawTxHex</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    
+	    this is the ledger for a entry or chain commit
+
           </div>
           
         </div>
@@ -391,7 +387,8 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>ischaincommit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
-	    
+	    set this to true if the rawTxHex is a chain commit ledger.
+
           </div>
           
         </div>
@@ -442,7 +439,7 @@ fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>).then(<span 
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3f41f46f8dd23e0ef94d52d9fb851dfa78e29385/packages/hw-app-fct/src/Fct.js#L219-L229'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/3651f0fb2a8a353493ec42fe90828a1216efde9c/packages/hw-app-fct/src/Fct.js#L213-L223'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     

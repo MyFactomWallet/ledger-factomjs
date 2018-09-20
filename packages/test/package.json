@@ -1,7 +1,7 @@
 {
-  "private": true,
+  "private": false,
   "name": "@factoid.org/ledger-hw-test",
-  "version": "0.4.2-rc1",
+  "version": "0.4.2-rc3",
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {

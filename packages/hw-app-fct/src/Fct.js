@@ -24,7 +24,7 @@ import type Transport from "@ledgerhq/hw-transport";
  * MyFactomWallet Ledger API
  *
  * @example
- * import Fct from "hw-app-fct";
+ * import Fct from "@factoid.org/hw-app-fct";
  * const fct = new Fct(transport)
  */
 export default class Fct {
@@ -42,21 +42,18 @@ export default class Fct {
   /**
    * get Factom address for a given BIP 32 path.
    * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
-   * @option boolDisplay optionally enable or not the display
-   * @option boolChaincode optionally enable or not the chaincode request
-   * @return an object with a publicKey, address and (optionally) chainCode
+   * @option boolDisplay if true, optionally display the address on the device 
+   * @return an object with a publicKey and address 
    * @example
-   * fct.getAddress("44'/131'/0'/0'/0'").then(o => o.address)
-   * fct.getAddress("44'/132'/0'/0'/0'").then(o => o.address)
+   * const fctaddr = await fct.getAddress("44'/131'/0'/0'/0'")
+   * const ecaddr = await fct.getAddress("44'/132'/0'/0'/0'")
    */
   getAddress(
     path: string,
-    boolDisplay?: boolean,
-    boolChaincode?: boolean
+    boolDisplay?: boolean
   ): Promise<{
     publicKey: string,
-    address: string,
-    chainCode?: string
+    address: string
   }> {
     let paths = splitPath(path);
     let buffer = new Buffer.alloc(1 + paths.length * 4);
@@ -68,8 +65,8 @@ export default class Fct {
       .send(
         0xe0,
         0x02,
-        boolDisplay ? 0x01 : 0x00,
-        boolChaincode ? 0x01 : 0x00,
+        boolDisplay || false ? 0x01 : 0x00,
+        0x00,
         buffer
       )
       .then(response => {
@@ -87,22 +84,16 @@ export default class Fct {
               1 + publicKeyLength + 1 + addressLength
             )
             .toString("ascii")
-        if (boolChaincode) {
-          result.chainCode = response
-            .slice(
-              1 + publicKeyLength + 1 + addressLength,
-              1 + publicKeyLength + 1 + addressLength + 32
-            )
-            .toString("hex")
-        }
         return result
       });
   }
 
   /**
    * You can sign a transaction and retrieve v, r, s given the raw transaction and the BIP 32 path of the account to sign
+   * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
+   * @param rawTxHex The raw fct transaction request
    * @example
-   fct.signTransaction("44'/131'/0'/0'/0'", "02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f").then(result => ...)
+   const result = await fct.signTransaction("44'/131'/0'/0'/0'", "02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f")
    */
   signTransaction(
     path: string,
@@ -157,6 +148,9 @@ export default class Fct {
 
   /**
    * You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
+   * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
+   * @param rawTxHex this is the ledger for a entry or chain commit
+   * @param ischaincommit set this to true if the rawTxHex is a chain commit ledger.
    * @example
    fct.signCommit("44'/132'/0'/0'/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
    */
@@ -172,7 +166,7 @@ export default class Fct {
     let paths = splitPath(path)
     let offset = 0
     let p1 = 0
-    let p2 = ischaincommit
+    let p2 = ischaincommit || 0
     let rawTx = new Buffer(rawTxHex, "hex")
     let toSend = []
     let response

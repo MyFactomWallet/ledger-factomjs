@@ -1,5 +1,6 @@
 import testFctAppConfig from "./testFctAddr";
 import testFctAddr from "./testFctAddr";
+import testFctAddrDisplay from "./testFctAddrDisplay";
 import testFctTx from "./testFctTx";
 import testFctECAddr from "./testFctECAddr";
 import testFctEntryCommit from "./testFctEntryCommit";
@@ -17,6 +18,7 @@ var tests = [
   expectAppContext("Factom (fct)"),
   { name: "testFctECAddr", run: testFctECAddr },
   { name: "testFctAddr", run: testFctAddr },
+  { name: "testFctAddrDisplay", run: testFctAddrDisplay },
   { name: "testFctTx", run: testFctTx },
   { name: "testFctEntryCommit", run: testFctEntryCommit },
   { name: "testFctChainCommit", run: testFctChainCommit },
