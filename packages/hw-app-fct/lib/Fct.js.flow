@@ -156,7 +156,7 @@ export default class Fct {
    */
   signCommit(
     path: string,
-    rawTxHex: string, /*change to tx: Transation */
+    rawTxHex: string, 
     ischaincommit?: boolean
   ): Promise<{
     s: string,

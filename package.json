@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ledger-factomjs",
-  "version": "0.4.3",
+  "version": "0.4.3-rc1",
   "workspaces": [
     "packages/hw-app-fct",
     "packages/test",

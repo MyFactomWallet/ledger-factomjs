@@ -128,8 +128,7 @@ var Fct = function () {
 
   }, {
     key: "signCommit",
-    value: function signCommit(path, rawTxHex, /*change to tx: Transation */
-    ischaincommit) {
+    value: function signCommit(path, rawTxHex, ischaincommit) {
       var _this2 = this;
 
       var paths = (0, _utils.splitPath)(path);

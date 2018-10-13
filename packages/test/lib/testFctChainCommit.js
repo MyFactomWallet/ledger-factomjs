@@ -50,19 +50,17 @@ var cli = new FactomCli({
 
 exports.default = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(transport) {
-    var fct, ecRate, path, addr, ecaddr, content, e, chain, txId, ccbuffer, result, out;
+    var fct, path, addr, ecaddr, content, e, chain, txId, ccbuffer, result, out;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             fct = new _hwAppFct2.default(transport);
-            ecRate = 24000; //await CORS... cli.getEntryCreditRate()
-
             path = "44'/132'/0'/0'/0'";
-            _context.next = 5;
+            _context.next = 4;
             return fct.getAddress(path);
 
-          case 5:
+          case 4:
             addr = _context.sent;
             ecaddr = addr['address'];
             content = 'Hello Ledger';
@@ -76,10 +74,10 @@ exports.default = function () {
             console.log(ccbuffer.toString('hex'));
             console.log('========== Chain Ledger End ==========');
 
-            _context.next = 17;
+            _context.next = 16;
             return fct.signCommit(path, ccbuffer.toString('hex'), true);
 
-          case 17:
+          case 16:
             result = _context.sent;
 
 
@@ -99,7 +97,7 @@ exports.default = function () {
 
             return _context.abrupt('return', out);
 
-          case 29:
+          case 28:
           case 'end':
             return _context.stop();
         }

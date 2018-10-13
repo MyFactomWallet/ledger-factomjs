@@ -23,7 +23,6 @@ const cli = new FactomCli({
 
 export default async transport => {
   const fct = new Fct(transport);
-  const ecRate = 24000 //await CORS... cli.getEntryCreditRate()
   const path = "44'/132'/0'/0'/0'"
   const addr = await fct.getAddress(path)
   const ecaddr = addr['address']
