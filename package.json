@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "private": false,
   "name": "ledger-factomjs",
   "version": "0.4.3-rc1",
   "workspaces": [
