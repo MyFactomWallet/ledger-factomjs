@@ -39,6 +39,7 @@ var Fct = function () {
    * @example
    * const fctaddr = await fct.getAddress("44'/131'/0'/0'/0'")
    * const ecaddr = await fct.getAddress("44'/132'/0'/0'/0'")
+   * const idaddr = await fct.getAddress("44'/143165576'/0'/0'/0'")
    */
 
 
@@ -52,7 +53,6 @@ var Fct = function () {
         buffer.writeUInt32BE(element, 1 + 4 * index);
       });
       return this.transport.send(0xe0, 0x02, boolDisplay || false ? 0x01 : 0x00, 0x00, buffer).then(function (response) {
-
         var result = {};
         var publicKeyLength = response[0];
         var addressLength = response[1 + publicKeyLength];
@@ -83,7 +83,7 @@ var Fct = function () {
       var response = void 0;
 
       var _loop = function _loop() {
-        var maxChunkSize = offset === 0 ? 255 - 1 - paths.length * 4 : 255;
+        var maxChunkSize = offset === 0 ? 150 - 1 - paths.length * 4 : 150;
         var chunkSize = offset + maxChunkSize > rawTx.length ? rawTx.length - offset : maxChunkSize;
         var buffer = new Buffer(offset === 0 ? 1 + paths.length * 4 + chunkSize : chunkSize);
         if (offset === 0) {
@@ -141,7 +141,7 @@ var Fct = function () {
       var response = void 0;
 
       var _loop2 = function _loop2() {
-        var maxChunkSize = offset === 0 ? 255 - 1 - paths.length * 4 : 255;
+        var maxChunkSize = offset === 0 ? 150 - 1 - paths.length * 4 : 150;
         var chunkSize = offset + maxChunkSize > rawTx.length ? rawTx.length - offset : maxChunkSize;
         var buffer = new Buffer(offset === 0 ? 1 + paths.length * 4 + chunkSize : chunkSize);
         if (offset === 0) {

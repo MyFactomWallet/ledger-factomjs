@@ -47,6 +47,7 @@ export default class Fct {
    * @example
    * const fctaddr = await fct.getAddress("44'/131'/0'/0'/0'")
    * const ecaddr = await fct.getAddress("44'/132'/0'/0'/0'")
+   * const idaddr = await fct.getAddress("44'/143165576'/0'/0'/0'")
    */
   getAddress(
     path: string,
@@ -70,7 +71,6 @@ export default class Fct {
         buffer
       )
       .then(response => {
-
         let result = {};
         let publicKeyLength = response[0];
         let addressLength = response[1 + publicKeyLength];
@@ -109,7 +109,7 @@ export default class Fct {
     let toSend = [];
     let response;
     while (offset !== rawTx.length) {
-      let maxChunkSize = offset === 0 ? 255 - 1 - paths.length * 4 : 255
+      let maxChunkSize = offset === 0 ? 150 - 1 - paths.length * 4 : 150 
       let chunkSize =
         offset + maxChunkSize > rawTx.length
           ? rawTx.length - offset
@@ -171,7 +171,7 @@ export default class Fct {
     let toSend = []
     let response
     while (offset !== rawTx.length) {
-      let maxChunkSize = offset === 0 ? 255 - 1 - paths.length * 4 : 255;
+      let maxChunkSize = offset === 0 ? 150 - 1 - paths.length * 4 : 150;
       let chunkSize =
         offset + maxChunkSize > rawTx.length
           ? rawTx.length - offset

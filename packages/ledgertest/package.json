@@ -1,14 +1,12 @@
 {
   "private": false,
-  "name": "@factoid.org/ledger-hw-test",
-  "version": "0.4.2-rc3",
-  "main": "index.js",
+  "name": "@factoid.org/ledgertest",
+  "version": "0.4.3",
+  "main": "index-browser.js",
   "license": "Apache-2.0",
   "dependencies": {
-    "@ledgerhq/hw-transport-mocker": "^4.24.0",
-    "@ledgerhq/hw-transport-node-hid": "^4.24.0",
-    "@ledgerhq/hw-transport": "^4.24.0",
     "@ledgerhq/hw-transport-u2f": "^4.24.0",
+    "@factoid.org/hw-app-fct": "^0.4.2-rc3",
     "factom":"^0.3.6",
     "tweetnacl": "^1.0.0",
     "budo": "^11.0.1"
@@ -29,14 +27,10 @@
 
   },
   "scripts": {
-    "test-browser": "budo --cors --ssl lib/index-browser.js",
-    "test-node": "node lib/index-node.js",
-    "test-snapshot": "node lib/index-snapshot.js",
-    "test": "yarn run test-snapshot",
+    "ledgertest-browser": "budo --cors --ssl lib/index-browser.js",
     "flow": "flow",
     "clean": "rm -rf lib/",
-    "build": "cd ../.. && export PATH=$(yarn bin):$PATH && cd - && babel --source-maps -d lib src",
-    "build1": "webpack",
+    "build": "webpack",
     "watch": "cd ../.. && export PATH=$(yarn bin):$PATH && cd - && babel --watch --source-maps -d lib src & flow-copy-source -w -v src lib"
   }
 }
