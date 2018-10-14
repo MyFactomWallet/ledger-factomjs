@@ -1,11 +1,10 @@
 {
   "private": false,
-  "name": "@factoid.org/ledgertest",
-  "version": "0.4.4",
+  "name": "@factoid.org/ledger-test-browser",
+  "version": "0.4.5",
   "main": "index-browser.js",
   "license": "Apache-2.0",
   "dependencies": {
-    "@factoid.org/hw-app-fct": "^0.4.4",
     "@ledgerhq/hw-transport-u2f": "^4.24.0",
     "budo": "^11.0.1",
     "factom": "^0.3.6",
