@@ -1,7 +1,7 @@
 {
-  "private": false,
+  "private": true,
   "name": "ledger-factomjs",
-  "version": "0.4.3-rc1",
+  "version": "0.4.6-rc1",
   "workspaces": [
     "packages/hw-app-fct",
     "packages/test",
@@ -14,6 +14,7 @@
     "test-node": "cd packages/test && yarn run test-node",
     "test-browser": "cd packages/test && yarn run test-browser",
     "ledgertest-browser": "cd packages/ledgertest && yarn run ledgertest-browser",
+    "recovery": "cd packages/recovery && yarn run recovery-browser",
     "documentation": "documentation build packages/hw-*/src/** packages/react-native-*/src/** --project-name '@factoid.org/*' --project-version `node -e \"console.log(require('./lerna.json').version)\"` --project-homepage https://github.com/MyFactomWallet/ledger-factomjs --config documentation.yml -g -f html -o docs",
     "prettier": "prettier --write 'packages/*/src/**/*.js'",
     "prettier-diff": "prettier --list-different 'packages/*/src/**/*.js'",

@@ -23,26 +23,18 @@ const cli = new FactomCli({
 export default async transport => {
   const fct = new Fct(transport);
   const amount = 1000000
-  const ecRate = 24000 //await cli.getEntryCreditRate()
-  const path = "44'/131'/0'/0'/0'"
+  const ecRate = 22000 //await cli.getEntryCreditRate()
+  const path = "44'/131'/0'/0/0"
   const addr = await fct.getAddress(path)
   const fromAddr = addr['address']
 
   const toAddr = 'FA3nr5r54AKBZ9SLABS3JyRoGcWMVMTkePW9MECKM8shMg2pMagn'
 
   const numinputs = 1
-  const numoutputs = 10
+  const numoutputs = 1
 
   const fees = Transaction.builder()
     .input(fromAddr, amount*numoutputs)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
     .output(toAddr, amount)
     .build()
     .computeRequiredFees(ecRate, { rcdSignatureLength: numoutputs * (33 + 64), numberOfSignatures: numinputs })
@@ -52,18 +44,15 @@ export default async transport => {
   console.log("**************")
   console.log("***  fees  ***")
   console.log(fees)
+  console.log("***  display fees  ***")
+  console.log(fees*1e-8)
+  console.log("**************")
+  console.log("***  toAddr  ***")
+  console.log(toAddr)
   console.log("**************")
 
   const t = Transaction.builder()
     .input(fromAddr, amount*numoutputs+fees)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
-    .output(toAddr, amount)
     .output(toAddr, amount)
     .build()
 
@@ -72,7 +61,7 @@ export default async transport => {
   console.log(t.marshalBinarySig.toString('hex'))
   console.log('-------------========== TXN ==========----------------')
 
-  const result = await fct.signTransaction("44'/131'/0'/0'/0'", t.marshalBinarySig.toString('hex'));
+  const result = await fct.signTransaction(path, t.marshalBinarySig.toString('hex'));
 
   console.log('-------------========== SIGNATURE ==========----------------')
   console.log(result)
