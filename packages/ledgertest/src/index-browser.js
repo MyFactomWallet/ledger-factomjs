@@ -205,7 +205,7 @@ btn.onclick = async () => {
       transport.setDebugMode(debugMode);
       
       // const path = getFctHDPath(account_number,change_addr,addr_index)
-      const path = "44'/143165576'/0'/0/0"
+      const path = "44'/281'/0'/0/0"
       console.log(path)
 
       const result = await getFctAddr(transport,path,false);
