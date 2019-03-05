@@ -4,7 +4,7 @@ import assert from 'assert'
 
 export default async transport => {
   const fct = new Fct(transport);
-  const result = await fct.getAddress("44'/143165576'/0'/0/0");
+  const result = await fct.getAddress("44'/281'/0'/0/0");
   //assert(address.isValidAddress(result['address'])
   console.log(result)
   return result;
