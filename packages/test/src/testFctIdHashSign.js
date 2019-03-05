@@ -4,7 +4,7 @@ const { Entry, validateEntryInstance, composeEntry, composeEntryLedger } = requi
 
 export default async transport => {
   const fct = new Fct(transport);
-  const path = "44'/143165576'/0'/0/0"
+  const path = "44'/281'/0'/0/0"
 
   const ecBuffer = Buffer.fromString('The quick brown fox jumps over the lazy dog');
   
