@@ -1,6 +1,6 @@
 {
   "name": "@factoid.org/hw-app-fct",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Ledger Hardware Wallet Factom Application API",
   "keywords": [
     "Ledger",
