@@ -32,10 +32,8 @@ exports.default = function () {
         switch (_context.prev = _context.next) {
           case 0:
             fct = new _hwAppFct2.default(transport);
-            //const result = await fct.getAddress("44'/3869'/0'/0'/0'");
-
             _context.next = 3;
-            return fct.getAddress("44'/143165576'/0'/0'/0'");
+            return fct.getAddress("44'/281'/0'/0/0");
 
           case 3:
             result = _context.sent;

@@ -16,6 +16,10 @@ var _promise = require("babel-runtime/core-js/promise");
 
 var _promise2 = _interopRequireDefault(_promise);
 
+var _testFctAppConfig = require("./testFctAppConfig");
+
+var _testFctAppConfig2 = _interopRequireDefault(_testFctAppConfig);
+
 var _testFctAddr = require("./testFctAddr");
 
 var _testFctAddr2 = _interopRequireDefault(_testFctAddr);
@@ -40,6 +44,18 @@ var _testFctChainCommit = require("./testFctChainCommit");
 
 var _testFctChainCommit2 = _interopRequireDefault(_testFctChainCommit);
 
+var _testFctAddrPath = require("./testFctAddrPath");
+
+var _testFctAddrPath2 = _interopRequireDefault(_testFctAddrPath);
+
+var _testFctIdAddr = require("./testFctIdAddr");
+
+var _testFctIdAddr2 = _interopRequireDefault(_testFctIdAddr);
+
+var _testFctIdHashSign = require("./testFctIdHashSign");
+
+var _testFctIdHashSign2 = _interopRequireDefault(_testFctIdHashSign);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function expectAppContext(appName) {
@@ -50,7 +66,7 @@ function expectAppContext(appName) {
   };
 }
 
-var tests = [expectAppContext("Factom (fct)"), { name: "testFctECAddr", run: _testFctECAddr2.default }, { name: "testFctAddr", run: _testFctAddr2.default }, { name: "testFctAddrDisplay", run: _testFctAddrDisplay2.default }, { name: "testFctTx", run: _testFctTx2.default }, { name: "testFctEntryCommit", run: _testFctEntryCommit2.default }, { name: "testFctChainCommit", run: _testFctChainCommit2.default }, { name: "testFctAppConfig", run: _testFctAddr2.default }];
+var tests = [expectAppContext("Factom (fct)"), { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdAddr", run: _testFctAddr2.default }, { name: "testFctAddr", run: _testFctAddr2.default }, { name: "testFctECAddr", run: _testFctECAddr2.default }, { name: "testFctAddrDisplay", run: _testFctAddrDisplay2.default }, { name: "testFctTx", run: _testFctTx2.default }, { name: "testFctEntryCommit", run: _testFctEntryCommit2.default }, { name: "testFctChainCommit", run: _testFctChainCommit2.default }, { name: "testFctAppConfig", run: _testFctAppConfig2.default }, { name: "testFctAddrPath", run: _testFctAddrPath2.default }];
 
 var defaultWaitForAppSwitch = function defaultWaitForAppSwitch(step) {
   return new _promise2.default(function (resolve) {

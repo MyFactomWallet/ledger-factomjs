@@ -33,7 +33,7 @@ exports.default = function () {
           case 0:
             fct = new _hwAppFct2.default(transport);
             _context.next = 3;
-            return fct.getAddress("44'/131'/0'/0'/0'", true);
+            return fct.getAddress("44'/131'/0'/0/0", true);
 
           case 3:
             result = _context.sent;
