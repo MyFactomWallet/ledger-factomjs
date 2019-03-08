@@ -49,7 +49,7 @@ export default class Fct {
    * @example
    * const fctaddr = await fct.getAddress("44'/131'/0'/0'/0'")
    * const ecaddr = await fct.getAddress("44'/132'/0'/0'/0'")
-   * const idaddr = await fct.getAddress("44'/143165576'/0'/0'/0'")
+   * const idaddr = await fct.getAddress("44'/281'/0'/0'/0'")
    */
   
   getAddress(
@@ -65,7 +65,7 @@ export default class Fct {
     const bipPath = BIPPath.fromString(path).toPathArray();
 
     let buffer = new Buffer.alloc(1 + bipPath.length * 4);
-    const boolIdAddr = (bipPath[1] === 0x88888888)
+    const boolIdAddr = (bipPath[1] === 0x80000119)
     
     buffer.writeInt8(bipPath.length, 0);
     bipPath.forEach((segment, index) => {
@@ -245,7 +245,7 @@ export default class Fct {
    * @param rawMessage this is the raw data Buffer to be signed
    * @param tosha512 set this to true to hash the rawMessage using sha512, the default is sha256.
    * @example
-   fct.signMessageHash("44'/143165576'/0'/0'/0", "The quick brown fox jumps over the lazy dog.",true).then(result => ...)
+   fct.signMessageHash("44'/281'/0'/0'/0", "The quick brown fox jumps over the lazy dog.",true).then(result => ...)
    */
   signMessageHash(
     path: string,
@@ -343,7 +343,7 @@ export default class Fct {
    * @param rawMessage this is the raw data Buffer to be signed
    * @param tosha512 set this to true to has the rawMessage .
    * @example
-   fct.signMessageRaw("44'/143165576'/0'/0/0", "The quick brown fox jumps over the lazy dog.").then(result => ...)
+   fct.signMessageRaw("44'/281'/0'/0/0", "The quick brown fox jumps over the lazy dog.").then(result => ...)
    */
   signMessageRaw(
     path: string,
