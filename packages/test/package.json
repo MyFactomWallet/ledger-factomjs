@@ -11,7 +11,9 @@
     "@ledgerhq/hw-transport-u2f": "^4.24.0",
     "budo": "^11.0.1",
     "factom": "^0.3.6",
-    "tweetnacl": "^1.0.0"
+    "tweetnacl": "^1.0.0",
+    "js-sha512": "^0.8.0",
+    "js-sha256": "^0.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -30,7 +32,9 @@
     "test-browser": "budo --cors --ssl lib/index-browser.js",
     "test-node": "node lib/index-node.js",
     "test-snapshot": "node lib/index-snapshot.js",
+    "test-snapshot-id": "node lib/index-snapshot-id.js",
     "test": "yarn run test-snapshot",
+    "test-id": "node lib/index-node-id.js",
     "flow": "flow",
     "clean": "rm -rf lib/",
     "build": "cd ../.. && export PATH=$(yarn bin):$PATH && cd - && babel --source-maps -d lib src",
