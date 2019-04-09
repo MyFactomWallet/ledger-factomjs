@@ -16,38 +16,6 @@ var _promise = require("babel-runtime/core-js/promise");
 
 var _promise2 = _interopRequireDefault(_promise);
 
-var _testFctAppConfig = require("./testFctAppConfig");
-
-var _testFctAppConfig2 = _interopRequireDefault(_testFctAppConfig);
-
-var _testFctAddr = require("./testFctAddr");
-
-var _testFctAddr2 = _interopRequireDefault(_testFctAddr);
-
-var _testFctAddrDisplay = require("./testFctAddrDisplay");
-
-var _testFctAddrDisplay2 = _interopRequireDefault(_testFctAddrDisplay);
-
-var _testFctTx = require("./testFctTx");
-
-var _testFctTx2 = _interopRequireDefault(_testFctTx);
-
-var _testFctECAddr = require("./testFctECAddr");
-
-var _testFctECAddr2 = _interopRequireDefault(_testFctECAddr);
-
-var _testFctEntryCommit = require("./testFctEntryCommit");
-
-var _testFctEntryCommit2 = _interopRequireDefault(_testFctEntryCommit);
-
-var _testFctChainCommit = require("./testFctChainCommit");
-
-var _testFctChainCommit2 = _interopRequireDefault(_testFctChainCommit);
-
-var _testFctAddrPath = require("./testFctAddrPath");
-
-var _testFctAddrPath2 = _interopRequireDefault(_testFctAddrPath);
-
 var _testFctIdAddr = require("./testFctIdAddr");
 
 var _testFctIdAddr2 = _interopRequireDefault(_testFctIdAddr);
@@ -66,7 +34,7 @@ function expectAppContext(appName) {
   };
 }
 
-var tests = [expectAppContext("Factom (fct)"), { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdAddr", run: _testFctIdAddr2.default }, { name: "testFctAddr", run: _testFctAddr2.default }, { name: "testFctECAddr", run: _testFctECAddr2.default }, { name: "testFctAddrDisplay", run: _testFctAddrDisplay2.default }, { name: "testFctTx", run: _testFctTx2.default }, { name: "testFctEntryCommit", run: _testFctEntryCommit2.default }, { name: "testFctChainCommit", run: _testFctChainCommit2.default }, { name: "testFctAppConfig", run: _testFctAppConfig2.default }, { name: "testFctAddrPath", run: _testFctAddrPath2.default }];
+var tests = [expectAppContext("Factom (fct)"), { name: "testFctIdAddr", run: _testFctIdAddr2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }];
 
 var defaultWaitForAppSwitch = function defaultWaitForAppSwitch(step) {
   return new _promise2.default(function (resolve) {
@@ -313,4 +281,4 @@ exports.default = function () {
     return _ref.apply(this, arguments);
   };
 }();
-//# sourceMappingURL=runTests.js.map
+//# sourceMappingURL=runIdTest.js.map
