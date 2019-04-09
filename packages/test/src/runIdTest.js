@@ -1,11 +1,3 @@
-import testFctAppConfig from "./testFctAppConfig";
-import testFctAddr from "./testFctAddr";
-import testFctAddrDisplay from "./testFctAddrDisplay";
-import testFctTx from "./testFctTx";
-import testFctECAddr from "./testFctECAddr";
-import testFctEntryCommit from "./testFctEntryCommit";
-import testFctChainCommit from "./testFctChainCommit";
-import testFctAddrPath from "./testFctAddrPath";
 import testFctIdAddr from "./testFctIdAddr";
 import testFctIdHashSign from "./testFctIdHashSign";
 
@@ -19,16 +11,10 @@ function expectAppContext(appName) {
 
 var tests = [
   expectAppContext("Factom (fct)"),
-  { name: "testFctIdHashSign", run: testFctIdHashSign },
   { name: "testFctIdAddr", run: testFctIdAddr },
-  { name: "testFctAddr", run: testFctAddr },
-  { name: "testFctECAddr", run: testFctECAddr },
-  { name: "testFctAddrDisplay", run: testFctAddrDisplay },
-  { name: "testFctTx", run: testFctTx },
-  { name: "testFctEntryCommit", run: testFctEntryCommit },
-  { name: "testFctChainCommit", run: testFctChainCommit },
-  { name: "testFctAppConfig", run: testFctAppConfig },
-  { name: "testFctAddrPath", run: testFctAddrPath },
+  { name: "testFctIdHashSign", run: testFctIdHashSign },
+  { name: "testFctIdHashSign", run: testFctIdHashSign },
+  { name: "testFctIdHashSign", run: testFctIdHashSign },
 ];
 
 const defaultWaitForAppSwitch = step =>

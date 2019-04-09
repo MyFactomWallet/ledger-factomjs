@@ -1,5 +1,6 @@
 import Fct from '@factoid.org/hw-app-fct'
-
+import sha512 from 'js-sha512'
+import sha256 from 'js-sha256'
 const { Entry, validateEntryInstance, composeEntry, composeEntryLedger } = require( 'factom/src/entry' )
 
 export default async transport => {
@@ -11,9 +12,23 @@ export default async transport => {
   console.log('========== Entry Commit Ledger Begin ==========')
   console.log(ecbuffer.toString('hex'))
   console.log('========== Entry Commit Ledger End ==========')
-
-  //sha256
+//sha256
   let result = await fct.signMessageHash(path, ecbuffer.toString('hex'), false)
+  if ( result['h'] != sha256.hex(ecbuffer.toString()) ) {
+     console.log("SHA256 Hash is invalid!!!")
+     throw("Invalid hash from device")
+  } else {
+     console.log("Hash from device is valid!!!")
+  }
+  if(nacl.detached.verify(result['h'], result['s'], result['k'])) {
+       console.log("Transaction Signature is valid!!!")
+    } else {
+       console.log("Transaction Signature is NOT valid!!!")
+       throw("Invalid Identity Signature")
+    }
+
+
+
 
   console.log('========== Signed Hash ==========')
   console.log(result)
@@ -21,6 +36,19 @@ export default async transport => {
 
   //sha512
   result = await fct.signMessageHash(path, ecbuffer.toString('hex'), true)
+  if ( result['h'] != sha512.hex(ecbuffer.toString()) ) {
+     console.log("SHA512 Hash is invalid!!!")
+     throw("Invalid hash from device")
+  } else {
+     console.log("Hash from device is valid!!!")
+  }
+  if(nacl.detached.verify(result['h'], result['s'], result['k'])) {
+     console.log("Transaction Signature is valid!!!")
+  } else {
+     console.log("Transaction Signature is NOT valid!!!")
+     throw("Invalid Identity Signature")
+  }
+
 
   return out
 }
