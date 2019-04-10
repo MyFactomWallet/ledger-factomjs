@@ -79,7 +79,7 @@ async function txtestfail() {
 
   try {
     const path = getFctHDPath(account_number,change_addr,addr_index)
-    const amount = 1000000
+    const amount = 10000000
     const ecRate = 24000 //await cli.getEntryCreditRate()
     const addr = await getFctAddr(transport, path, false)
     const fromAddr = addr['address']
@@ -87,18 +87,38 @@ async function txtestfail() {
     const toAddr = 'FA3nr5r54AKBZ9SLABS3JyRoGcWMVMTkePW9MECKM8shMg2pMagn'
 
     const numinputs = 1
-    const numoutputs = 1
+    const numoutputs =  11
 
     const fees = Transaction.builder()
       .input(fromAddr, amount)
-      .output(toAddr, amount)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
       .build()
       .computeRequiredFees(ecRate, { rcdSignatureLength: numoutputs * (33 + 64), numberOfSignatures: numinputs })
 
 
     const t = Transaction.builder()
       .input(fromAddr, amount+fees)
-      .output(toAddr, amount)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
+      .output(toAddr, amount/numoutputs)
       .build()
 
 

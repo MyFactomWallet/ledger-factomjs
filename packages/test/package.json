@@ -35,6 +35,7 @@
     "test-snapshot-id": "node lib/index-snapshot-id.js",
     "test": "yarn run test-snapshot",
     "test-id": "node lib/index-node-id.js",
+    "test-tx-mult": "node lib/index-node-txmult.js",
     "flow": "flow",
     "clean": "rm -rf lib/",
     "build": "cd ../.. && export PATH=$(yarn bin):$PATH && cd - && babel --source-maps -d lib src",
