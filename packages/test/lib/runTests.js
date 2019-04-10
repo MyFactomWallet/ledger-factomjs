@@ -66,7 +66,10 @@ function expectAppContext(appName) {
   };
 }
 
-var tests = [expectAppContext("Factom (fct)"), { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdAddr", run: _testFctIdAddr2.default }, { name: "testFctAddr", run: _testFctAddr2.default }, { name: "testFctECAddr", run: _testFctECAddr2.default }, { name: "testFctAddrDisplay", run: _testFctAddrDisplay2.default }, { name: "testFctTx", run: _testFctTx2.default }, { name: "testFctEntryCommit", run: _testFctEntryCommit2.default }, { name: "testFctChainCommit", run: _testFctChainCommit2.default }, { name: "testFctAppConfig", run: _testFctAppConfig2.default }, { name: "testFctAddrPath", run: _testFctAddrPath2.default }];
+var tests = [expectAppContext("Factom (fct)"), { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdAddr", run: _testFctIdAddr2.default }, { name: "testFctAddr", run: _testFctAddr2.default }, { name: "testFctECAddr", run: _testFctECAddr2.default }, { name: "testFctAddrDisplay", run: _testFctAddrDisplay2.default }, { name: "testFctTx", run: _testFctTx2.default },
+//  { name: "testFctEntryCommit", run: testFctEntryCommit },
+//  { name: "testFctChainCommit", run: testFctChainCommit },
+{ name: "testFctAppConfig", run: _testFctAppConfig2.default }, { name: "testFctAddrPath", run: _testFctAddrPath2.default }];
 
 var defaultWaitForAppSwitch = function defaultWaitForAppSwitch(step) {
   return new _promise2.default(function (resolve) {

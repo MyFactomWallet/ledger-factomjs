@@ -25,8 +25,8 @@ var tests = [
   { name: "testFctECAddr", run: testFctECAddr },
   { name: "testFctAddrDisplay", run: testFctAddrDisplay },
   { name: "testFctTx", run: testFctTx },
-  { name: "testFctEntryCommit", run: testFctEntryCommit },
-  { name: "testFctChainCommit", run: testFctChainCommit },
+//  { name: "testFctEntryCommit", run: testFctEntryCommit },
+//  { name: "testFctChainCommit", run: testFctChainCommit },
   { name: "testFctAppConfig", run: testFctAppConfig },
   { name: "testFctAddrPath", run: testFctAddrPath },
 ];
