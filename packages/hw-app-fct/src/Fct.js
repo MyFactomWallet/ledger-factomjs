@@ -47,9 +47,9 @@ export default class Fct {
    * @option boolDisplay if true, optionally display the address on the device 
    * @return an object with a publicKey and address with optional chainCode and chainid
    * @example
-   * const fctaddr = await fct.getAddress("44'/131'/0'/0'/0'")
-   * const ecaddr = await fct.getAddress("44'/132'/0'/0'/0'")
-   * const idaddr = await fct.getAddress("44'/281'/0'/0'/0'")
+   * const fctaddr = await fct.getAddress("44'/131'/0'/0/0")
+   * const ecaddr = await fct.getAddress("44'/132'/0'/0/0")
+   * const idaddr = await fct.getAddress("44'/281'/0'/0/0")
    */
   
   getAddress(
@@ -123,15 +123,15 @@ export default class Fct {
    * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
    * @param rawTxHex The raw fct transaction request
    * @example
-   const result = await fct.signTransaction("44'/131'/0'/0'/0'", "02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f")
+   const result = await fct.signTransaction("44'/131'/0'/0/0", "02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f")
    */
   signTransaction(
     path: string,
     rawTxHex: string /*change to tx: Transation */
   ): Promise<{
-    s: string,
     v: string,
-    r: string
+    r: string,
+    s: string
   }> {
     let paths = splitPath(path);
     let offset = 0;
@@ -182,16 +182,15 @@ export default class Fct {
    * @param rawTxHex this is the ledger for a entry or chain commit
    * @param ischaincommit set this to true if the rawTxHex is a chain commit ledger.
    * @example
-   fct.signCommit("44'/132'/0'/0'/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
+   fct.signCommit("44'/132'/0'/0/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
    */
   signCommit(
     path: string,
     rawTxHex: string, 
     ischaincommit?: boolean
   ): Promise<{
-    s: string,
-    v: string,
-    r: string
+    k: string,
+    s: string
   }> {
     const bipPath = BIPPath.fromString(path).toPathArray();
     let offset = 0
@@ -235,26 +234,30 @@ export default class Fct {
       const v = response.slice(32, 32 + 2).readUInt16BE(0)
       //signature
       const s = response.slice(34, 34 + v ).toString('hex')
-      return { v, k, s }
+      return { k, s }
     })
   }
 
     /**
-   * You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
+   * You can sign an arbitrary message and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
+   * The message will be automatically hashed by the device using either sha256 (default) or sha512 if tosha512 is set to true.
+   * If coin types 131 or 132 are used "FCT Signed Message\n" or "EC Signed Message\n" is prepended to the message inside the ledger
+   * prior to the device hashing then signing the hash.  If the identity coin type 281 is used, then the message is directly hashed
+   * then signed by the ledger.
    * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
    * @param rawMessage this is the raw data Buffer to be signed
-   * @param tosha512 set this to true to hash the rawMessage using sha512, the default is sha256.
+   * @param tosha512 set this to true to hash the rawMessage using sha512, the default (or false) is sha256.
    * @example
-   fct.signMessageHash("44'/281'/0'/0'/0", "The quick brown fox jumps over the lazy dog.",true).then(result => ...)
+   fct.signMessageHash("44'/281'/0'/0/0", "The quick brown fox jumps over the lazy dog.",true).then(result => ...)
    */
   signMessageHash(
     path: string,
     rawMessage: Buffer, 
     tosha512?: boolean
   ): Promise<{
+    k: string,
     s: string,
-    v: string,
-    r: string
+    h: string
   }> {
     const bipPath = BIPPath.fromString(path).toPathArray();
     let offset = 0
@@ -299,9 +302,10 @@ export default class Fct {
       //signature
       const s = response.slice(34, 34 + v ).toString('hex')
       const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+      //hash
       const h = response.slice(36 + v, 36 + v + l).toString('hex')
 
-      return { v, k, s, l, h }
+      return { k, s, h }
     })
   }
 
@@ -311,7 +315,7 @@ export default class Fct {
    * @param rawTxHex this is the ledger for a entry or chain commit
    * @param ischaincommit set this to true if the rawTxHex is a chain commit ledger.
    * @example
-   fct.signCommit("44'/132'/0'/0'/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
+   fct.storeChainId("44'/132'/0'/0'/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
    */
 
   storeChainId(
@@ -338,10 +342,10 @@ export default class Fct {
   }
 
     /**
-   * You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
-   * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
+   * This function will sign a raw message using the identity coin type only.  Attempts to sign with FCT or EC addresses will
+   * be rejected by the device.
+   * @param path a path in BIP 32 format 
    * @param rawMessage this is the raw data Buffer to be signed
-   * @param tosha512 set this to true to has the rawMessage .
    * @example
    fct.signMessageRaw("44'/281'/0'/0/0", "The quick brown fox jumps over the lazy dog.").then(result => ...)
    */
@@ -351,8 +355,7 @@ export default class Fct {
   ): Promise<{
     s: string,
     v: string,
-    r: string,
-    h: string
+    r: string
   }> {
     const bipPath = BIPPath.fromString(path).toPathArray();
     let offset = 0
@@ -395,9 +398,9 @@ export default class Fct {
       const v = response.slice(32, 32 + 2).readUInt16BE(0)
       //signature
       const s = response.slice(34, 34 + v ).toString('hex')
-      const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
-      const h = response.slice(36 + v, 36 + v + l).toString('hex') 
-      return { v, k, s, h }
+      //const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+      //const h = response.slice(36 + v, 36 + v + l).toString('hex') 
+      return { v, k, s }
     })
   }
 
