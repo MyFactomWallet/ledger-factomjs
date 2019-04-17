@@ -1,5 +1,6 @@
 import testFctIdAddr from "./testFctIdAddr";
 import testFctIdHashSign from "./testFctIdHashSign";
+import testFctIdRawSign from "./testFctIdRawSign";
 
 function expectAppContext(appName) {
   // TODO improve this by waiting user to do an action?
@@ -13,8 +14,7 @@ var tests = [
   expectAppContext("Factom (fct)"),
   { name: "testFctIdAddr", run: testFctIdAddr },
   { name: "testFctIdHashSign", run: testFctIdHashSign },
-  { name: "testFctIdHashSign", run: testFctIdHashSign },
-  { name: "testFctIdHashSign", run: testFctIdHashSign },
+  { name: "testFctIdRawSign", run: testFctIdRawSign },
 ];
 
 const defaultWaitForAppSwitch = step =>

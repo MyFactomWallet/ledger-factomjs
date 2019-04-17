@@ -24,6 +24,10 @@ var _testFctIdHashSign = require("./testFctIdHashSign");
 
 var _testFctIdHashSign2 = _interopRequireDefault(_testFctIdHashSign);
 
+var _testFctIdRawSign = require("./testFctIdRawSign");
+
+var _testFctIdRawSign2 = _interopRequireDefault(_testFctIdRawSign);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function expectAppContext(appName) {
@@ -34,7 +38,7 @@ function expectAppContext(appName) {
   };
 }
 
-var tests = [expectAppContext("Factom (fct)"), { name: "testFctIdAddr", run: _testFctIdAddr2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }];
+var tests = [expectAppContext("Factom (fct)"), { name: "testFctIdAddr", run: _testFctIdAddr2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdRawSign", run: _testFctIdRawSign2.default }];
 
 var defaultWaitForAppSwitch = function defaultWaitForAppSwitch(step) {
   return new _promise2.default(function (resolve) {
