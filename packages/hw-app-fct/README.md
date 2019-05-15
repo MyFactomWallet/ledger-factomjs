@@ -1,5 +1,5 @@
 
-## @factom/hw-app-fct
+## @factoid.org/hw-app-fct
 
 Library for Factom on Ledger Hardware Wallet.
 
