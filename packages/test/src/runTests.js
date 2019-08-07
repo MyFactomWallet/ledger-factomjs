@@ -8,6 +8,9 @@ import testFctChainCommit from "./testFctChainCommit";
 import testFctAddrPath from "./testFctAddrPath";
 import testFctIdAddr from "./testFctIdAddr";
 import testFctIdHashSign from "./testFctIdHashSign";
+import testFat0Tx from "./testFat0Tx";
+import testFat1Tx from "./testFat1Tx";
+import testFctTxMultiOut from "./testFctTxMultiOut";
 
 function expectAppContext(appName) {
   // TODO improve this by waiting user to do an action?
@@ -19,6 +22,8 @@ function expectAppContext(appName) {
 
 var tests = [
   expectAppContext("Factom (fct)"),
+  { name: "testFat0Tx", run: testFat0Tx },
+  { name: "testFat1Tx", run: testFat1Tx },
   { name: "testFctAddr", run: testFctAddr },
   { name: "testFctECAddr", run: testFctECAddr },
   { name: "testFctAddrDisplay", run: testFctAddrDisplay },
@@ -29,6 +34,7 @@ var tests = [
   { name: "testFctAddrPath", run: testFctAddrPath },
   { name: "testFctIdHashSign", run: testFctIdHashSign },
   { name: "testFctIdAddr", run: testFctIdAddr },
+  { name: "testFctTxMultiOut", run: testFctTxMultiOut },
 ];
 
 const defaultWaitForAppSwitch = step =>

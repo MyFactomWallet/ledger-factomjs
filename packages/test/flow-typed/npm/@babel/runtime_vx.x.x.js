@@ -1,4 +1,4 @@
-// flow-typed signature: a917842f306c4ff682d15dff21998915
+// flow-typed signature: 37246e1fcfe2f3a86add5965ba86aed9
 // flow-typed version: <<STUB>>/@babel/runtime_v^7.1.2/flow_v0.66.0
 
 /**
@@ -86,27 +86,11 @@ declare module '@babel/runtime/helpers/classPrivateFieldSet' {
   declare module.exports: any;
 }
 
-declare module '@babel/runtime/helpers/classPrivateMethodGet' {
-  declare module.exports: any;
-}
-
-declare module '@babel/runtime/helpers/classPrivateMethodSet' {
-  declare module.exports: any;
-}
-
 declare module '@babel/runtime/helpers/classStaticPrivateFieldSpecGet' {
   declare module.exports: any;
 }
 
 declare module '@babel/runtime/helpers/classStaticPrivateFieldSpecSet' {
-  declare module.exports: any;
-}
-
-declare module '@babel/runtime/helpers/classStaticPrivateMethodGet' {
-  declare module.exports: any;
-}
-
-declare module '@babel/runtime/helpers/classStaticPrivateMethodSet' {
   declare module.exports: any;
 }
 
@@ -198,27 +182,11 @@ declare module '@babel/runtime/helpers/esm/classPrivateFieldSet' {
   declare module.exports: any;
 }
 
-declare module '@babel/runtime/helpers/esm/classPrivateMethodGet' {
-  declare module.exports: any;
-}
-
-declare module '@babel/runtime/helpers/esm/classPrivateMethodSet' {
-  declare module.exports: any;
-}
-
 declare module '@babel/runtime/helpers/esm/classStaticPrivateFieldSpecGet' {
   declare module.exports: any;
 }
 
 declare module '@babel/runtime/helpers/esm/classStaticPrivateFieldSpecSet' {
-  declare module.exports: any;
-}
-
-declare module '@babel/runtime/helpers/esm/classStaticPrivateMethodGet' {
-  declare module.exports: any;
-}
-
-declare module '@babel/runtime/helpers/esm/classStaticPrivateMethodSet' {
   declare module.exports: any;
 }
 
@@ -390,10 +358,6 @@ declare module '@babel/runtime/helpers/esm/toConsumableArray' {
   declare module.exports: any;
 }
 
-declare module '@babel/runtime/helpers/esm/toPrimitive' {
-  declare module.exports: any;
-}
-
 declare module '@babel/runtime/helpers/esm/toPropertyKey' {
   declare module.exports: any;
 }
@@ -407,10 +371,6 @@ declare module '@babel/runtime/helpers/esm/wrapAsyncGenerator' {
 }
 
 declare module '@babel/runtime/helpers/esm/wrapNativeSuper' {
-  declare module.exports: any;
-}
-
-declare module '@babel/runtime/helpers/esm/wrapRegExp' {
   declare module.exports: any;
 }
 
@@ -558,10 +518,6 @@ declare module '@babel/runtime/helpers/toConsumableArray' {
   declare module.exports: any;
 }
 
-declare module '@babel/runtime/helpers/toPrimitive' {
-  declare module.exports: any;
-}
-
 declare module '@babel/runtime/helpers/toPropertyKey' {
   declare module.exports: any;
 }
@@ -575,10 +531,6 @@ declare module '@babel/runtime/helpers/wrapAsyncGenerator' {
 }
 
 declare module '@babel/runtime/helpers/wrapNativeSuper' {
-  declare module.exports: any;
-}
-
-declare module '@babel/runtime/helpers/wrapRegExp' {
   declare module.exports: any;
 }
 
@@ -635,23 +587,11 @@ declare module '@babel/runtime/helpers/classPrivateFieldLooseKey.js' {
 declare module '@babel/runtime/helpers/classPrivateFieldSet.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/classPrivateFieldSet'>;
 }
-declare module '@babel/runtime/helpers/classPrivateMethodGet.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/classPrivateMethodGet'>;
-}
-declare module '@babel/runtime/helpers/classPrivateMethodSet.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/classPrivateMethodSet'>;
-}
 declare module '@babel/runtime/helpers/classStaticPrivateFieldSpecGet.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/classStaticPrivateFieldSpecGet'>;
 }
 declare module '@babel/runtime/helpers/classStaticPrivateFieldSpecSet.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/classStaticPrivateFieldSpecSet'>;
-}
-declare module '@babel/runtime/helpers/classStaticPrivateMethodGet.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/classStaticPrivateMethodGet'>;
-}
-declare module '@babel/runtime/helpers/classStaticPrivateMethodSet.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/classStaticPrivateMethodSet'>;
 }
 declare module '@babel/runtime/helpers/construct.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/construct'>;
@@ -719,23 +659,11 @@ declare module '@babel/runtime/helpers/esm/classPrivateFieldLooseKey.js' {
 declare module '@babel/runtime/helpers/esm/classPrivateFieldSet.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/esm/classPrivateFieldSet'>;
 }
-declare module '@babel/runtime/helpers/esm/classPrivateMethodGet.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/esm/classPrivateMethodGet'>;
-}
-declare module '@babel/runtime/helpers/esm/classPrivateMethodSet.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/esm/classPrivateMethodSet'>;
-}
 declare module '@babel/runtime/helpers/esm/classStaticPrivateFieldSpecGet.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/esm/classStaticPrivateFieldSpecGet'>;
 }
 declare module '@babel/runtime/helpers/esm/classStaticPrivateFieldSpecSet.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/esm/classStaticPrivateFieldSpecSet'>;
-}
-declare module '@babel/runtime/helpers/esm/classStaticPrivateMethodGet.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/esm/classStaticPrivateMethodGet'>;
-}
-declare module '@babel/runtime/helpers/esm/classStaticPrivateMethodSet.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/esm/classStaticPrivateMethodSet'>;
 }
 declare module '@babel/runtime/helpers/esm/construct.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/esm/construct'>;
@@ -863,9 +791,6 @@ declare module '@babel/runtime/helpers/esm/toArray.js' {
 declare module '@babel/runtime/helpers/esm/toConsumableArray.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/esm/toConsumableArray'>;
 }
-declare module '@babel/runtime/helpers/esm/toPrimitive.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/esm/toPrimitive'>;
-}
 declare module '@babel/runtime/helpers/esm/toPropertyKey.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/esm/toPropertyKey'>;
 }
@@ -877,9 +802,6 @@ declare module '@babel/runtime/helpers/esm/wrapAsyncGenerator.js' {
 }
 declare module '@babel/runtime/helpers/esm/wrapNativeSuper.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/esm/wrapNativeSuper'>;
-}
-declare module '@babel/runtime/helpers/esm/wrapRegExp.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/esm/wrapRegExp'>;
 }
 declare module '@babel/runtime/helpers/extends.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/extends'>;
@@ -989,9 +911,6 @@ declare module '@babel/runtime/helpers/toArray.js' {
 declare module '@babel/runtime/helpers/toConsumableArray.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/toConsumableArray'>;
 }
-declare module '@babel/runtime/helpers/toPrimitive.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/toPrimitive'>;
-}
 declare module '@babel/runtime/helpers/toPropertyKey.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/toPropertyKey'>;
 }
@@ -1003,9 +922,6 @@ declare module '@babel/runtime/helpers/wrapAsyncGenerator.js' {
 }
 declare module '@babel/runtime/helpers/wrapNativeSuper.js' {
   declare module.exports: $Exports<'@babel/runtime/helpers/wrapNativeSuper'>;
-}
-declare module '@babel/runtime/helpers/wrapRegExp.js' {
-  declare module.exports: $Exports<'@babel/runtime/helpers/wrapRegExp'>;
 }
 declare module '@babel/runtime/regenerator/index.js' {
   declare module.exports: $Exports<'@babel/runtime/regenerator/index'>;

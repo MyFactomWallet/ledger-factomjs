@@ -56,6 +56,18 @@ var _testFctIdHashSign = require("./testFctIdHashSign");
 
 var _testFctIdHashSign2 = _interopRequireDefault(_testFctIdHashSign);
 
+var _testFat0Tx = require("./testFat0Tx");
+
+var _testFat0Tx2 = _interopRequireDefault(_testFat0Tx);
+
+var _testFat1Tx = require("./testFat1Tx");
+
+var _testFat1Tx2 = _interopRequireDefault(_testFat1Tx);
+
+var _testFctTxMultiOut = require("./testFctTxMultiOut");
+
+var _testFctTxMultiOut2 = _interopRequireDefault(_testFctTxMultiOut);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function expectAppContext(appName) {
@@ -66,7 +78,7 @@ function expectAppContext(appName) {
   };
 }
 
-var tests = [expectAppContext("Factom (fct)"), { name: "testFctAddr", run: _testFctAddr2.default }, { name: "testFctECAddr", run: _testFctECAddr2.default }, { name: "testFctAddrDisplay", run: _testFctAddrDisplay2.default }, { name: "testFctTx", run: _testFctTx2.default }, { name: "testFctEntryCommit", run: _testFctEntryCommit2.default }, { name: "testFctChainCommit", run: _testFctChainCommit2.default }, { name: "testFctAppConfig", run: _testFctAppConfig2.default }, { name: "testFctAddrPath", run: _testFctAddrPath2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdAddr", run: _testFctIdAddr2.default }];
+var tests = [expectAppContext("Factom (fct)"), { name: "testFat0Tx", run: _testFat0Tx2.default }, { name: "testFat1Tx", run: _testFat1Tx2.default }, { name: "testFctAddr", run: _testFctAddr2.default }, { name: "testFctECAddr", run: _testFctECAddr2.default }, { name: "testFctAddrDisplay", run: _testFctAddrDisplay2.default }, { name: "testFctTx", run: _testFctTx2.default }, { name: "testFctEntryCommit", run: _testFctEntryCommit2.default }, { name: "testFctChainCommit", run: _testFctChainCommit2.default }, { name: "testFctAppConfig", run: _testFctAppConfig2.default }, { name: "testFctAddrPath", run: _testFctAddrPath2.default }, { name: "testFctIdHashSign", run: _testFctIdHashSign2.default }, { name: "testFctIdAddr", run: _testFctIdAddr2.default }, { name: "testFctTxMultiOut", run: _testFctTxMultiOut2.default }];
 
 var defaultWaitForAppSwitch = function defaultWaitForAppSwitch(step) {
   return new _promise2.default(function (resolve) {

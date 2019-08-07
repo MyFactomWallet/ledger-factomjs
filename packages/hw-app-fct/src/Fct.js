@@ -21,7 +21,6 @@ import { splitPath, foreach } from "./utils";
 import type Transport from "@ledgerhq/hw-transport";
 import BIPPath from "bip32-path";
 
-
 /**
  * MyFactomWallet Ledger API
  *
@@ -36,7 +35,7 @@ export default class Fct {
     this.transport = transport;
     transport.decorateAppAPIMethods(
       this,
-      ["getAddress", "signTransaction", "signCommit", "signMessageRaw", "signMessageHash", "storeChainId", "getAppConfiguration"],
+      ["getAddress", "signTransaction", "signCommit", "signMessageRaw", "signMessageHash", "signFatTransaction", "storeChainId", "getAppConfiguration"],
       "TFA"
     );
   }
@@ -238,7 +237,7 @@ export default class Fct {
     })
   }
 
-    /**
+ /**
    * You can sign an arbitrary message and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
    * The message will be automatically hashed by the device using either sha256 (default) or sha512 if tosha512 is set to true.
    * If coin types 131 or 132 are used "FCT Signed Message\n" or "EC Signed Message\n" is prepended to the message inside the ledger
@@ -266,7 +265,7 @@ export default class Fct {
     let rawTx = rawMessage
     let toSend = []
     let response
-	  console.log('test')
+
     while (offset !== rawTx.length) {
       let maxChunkSize = offset === 0 ? 150 - 1 - bipPath.length * 4 : 150;
       let chunkSize =
@@ -404,6 +403,76 @@ export default class Fct {
     })
   }
 
+      
+    /**
+   * This function will sign a FAT 0 or 1 transaction using the Factoid Address.  
+   * @param path a path in BIP 32 format 
+   * @param fattype FAT protocol transaction type index 0: FAT-0, 1: FAT-1
+   * @param fattxraw this is the raw data fat transaction to be hashed then signed by device, Buffer.concat([index, timestamp, chainId, content])
+   * @example
+   fct.signFatTransaction("44'/131'/0'/0/0", "The quick brown fox jumps over the lazy dog.").then(result => ...)
+   */
+  signFatTransaction(
+    path: string,
+    fattype: number,
+    fattxbuffer : Buffer
+  ): Promise<{
+    s: string,
+    v: string,
+    r: string
+  }> {
+    const bipPath = BIPPath.fromString(path).toPathArray();
+    let offset = 0
+    let p1 = 0
+    let p2 = fattype
+    if ( p2 > 255 || p2 < 0 ) {
+        throw new Error("Invalid Transaction Type: FAT Transaction Type must be < 256 and >= 0")
+    }
+    let rawTx = fattxbuffer
+    let toSend = []
+    let response
+
+    while (offset !== rawTx.length) {
+      let maxChunkSize = offset === 0 ? 150 - 1 - bipPath.length * 4 : 150;
+      let chunkSize =
+        offset + maxChunkSize > rawTx.length
+          ? rawTx.length - offset
+          : maxChunkSize
+      let buffer = new Buffer(
+        offset === 0 ? 1 + bipPath.length * 4 + chunkSize : chunkSize
+      )
+      if (offset === 0) {
+        buffer.writeInt8(bipPath.length, 0);
+        bipPath.forEach((segment, index) => {
+          buffer.writeUInt32BE(segment, 1 + index * 4);
+        });
+        rawTx.copy(buffer, 1 + 4 * bipPath.length, offset, offset + chunkSize)
+      } else {
+        rawTx.copy(buffer, 0, offset, offset + chunkSize)
+      }
+      toSend.push(buffer)
+      offset += chunkSize
+    }
+    return foreach(toSend, (data, i) =>
+      this.transport
+        .send(0xe0, 0x20, i === 0 ? 0x00 : (i === toSend.length-1 ? 0x81 : 0x80), p2, data)
+        .then(apduResponse => {
+          response = apduResponse;
+        })
+    ).then(() => {
+      
+      const k = response.slice(0, 32).toString('hex')
+      //length of signature should be 64
+      const v = response.slice(32, 32 + 2).readUInt16BE(0)
+      //signature
+      const s = response.slice(34, 34 + v ).toString('hex')
+      const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+      //hash
+      const h = response.slice(36 + v, 36 + v + l).toString('hex')
+
+      return { k, s, h }
+    })
+  }
   
   /**
    */

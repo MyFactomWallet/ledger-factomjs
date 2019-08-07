@@ -49,7 +49,7 @@ var Fct = function () {
     (0, _classCallCheck3.default)(this, Fct);
 
     this.transport = transport;
-    transport.decorateAppAPIMethods(this, ["getAddress", "signTransaction", "signCommit", "signMessageRaw", "signMessageHash", "storeChainId", "getAppConfiguration"], "TFA");
+    transport.decorateAppAPIMethods(this, ["getAddress", "signTransaction", "signCommit", "signMessageRaw", "signMessageHash", "signFatTransaction", "storeChainId", "getAppConfiguration"], "TFA");
   }
 
   /**
@@ -58,9 +58,9 @@ var Fct = function () {
    * @option boolDisplay if true, optionally display the address on the device 
    * @return an object with a publicKey and address with optional chainCode and chainid
    * @example
-   * const fctaddr = await fct.getAddress("44'/131'/0'/0'/0'")
-   * const ecaddr = await fct.getAddress("44'/132'/0'/0'/0'")
-   * const idaddr = await fct.getAddress("44'/281'/0'/0'/0'")
+   * const fctaddr = await fct.getAddress("44'/131'/0'/0/0")
+   * const ecaddr = await fct.getAddress("44'/132'/0'/0/0")
+   * const idaddr = await fct.getAddress("44'/281'/0'/0/0")
    */
 
   (0, _createClass3.default)(Fct, [{
@@ -104,7 +104,7 @@ var Fct = function () {
      * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
      * @param rawTxHex The raw fct transaction request
      * @example
-     const result = await fct.signTransaction("44'/131'/0'/0'/0'", "02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f")
+     const result = await fct.signTransaction("44'/131'/0'/0/0", "02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f")
      */
 
   }, {
@@ -160,7 +160,7 @@ var Fct = function () {
      * @param rawTxHex this is the ledger for a entry or chain commit
      * @param ischaincommit set this to true if the rawTxHex is a chain commit ledger.
      * @example
-     fct.signCommit("44'/132'/0'/0'/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
+     fct.signCommit("44'/132'/0'/0/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
      */
 
   }, {
@@ -208,18 +208,22 @@ var Fct = function () {
         var v = response.slice(32, 32 + 2).readUInt16BE(0);
         //signature
         var s = response.slice(34, 34 + v).toString('hex');
-        return { v: v, k: k, s: s };
+        return { k: k, s: s };
       });
     }
 
     /**
-    * You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
-    * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
-    * @param rawMessage this is the raw data Buffer to be signed
-    * @param tosha512 set this to true to hash the rawMessage using sha512, the default is sha256.
-    * @example
-    fct.signMessageHash("44'/281'/0'/0'/0", "The quick brown fox jumps over the lazy dog.",true).then(result => ...)
-    */
+      * You can sign an arbitrary message and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
+      * The message will be automatically hashed by the device using either sha256 (default) or sha512 if tosha512 is set to true.
+      * If coin types 131 or 132 are used "FCT Signed Message\n" or "EC Signed Message\n" is prepended to the message inside the ledger
+      * prior to the device hashing then signing the hash.  If the identity coin type 281 is used, then the message is directly hashed
+      * then signed by the ledger.
+      * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
+      * @param rawMessage this is the raw data Buffer to be signed
+      * @param tosha512 set this to true to hash the rawMessage using sha512, the default (or false) is sha256.
+      * @example
+      fct.signMessageHash("44'/281'/0'/0/0", "The quick brown fox jumps over the lazy dog.",true).then(result => ...)
+      */
 
   }, {
     key: "signMessageHash",
@@ -233,7 +237,6 @@ var Fct = function () {
       var rawTx = rawMessage;
       var toSend = [];
       var response = void 0;
-      console.log('test');
 
       var _loop3 = function _loop3() {
         var maxChunkSize = offset === 0 ? 150 - 1 - bipPath.length * 4 : 150;
@@ -267,9 +270,10 @@ var Fct = function () {
         //signature
         var s = response.slice(34, 34 + v).toString('hex');
         var l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+        //hash
         var h = response.slice(36 + v, 36 + v + l).toString('hex');
 
-        return { v: v, k: k, s: s, l: l, h: h };
+        return { k: k, s: s, h: h };
       });
     }
 
@@ -279,7 +283,7 @@ var Fct = function () {
      * @param rawTxHex this is the ledger for a entry or chain commit
      * @param ischaincommit set this to true if the rawTxHex is a chain commit ledger.
      * @example
-     fct.signCommit("44'/132'/0'/0'/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
+     fct.storeChainId("44'/132'/0'/0'/0", "00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00",false).then(result => ...)
      */
 
   }, {
@@ -305,10 +309,10 @@ var Fct = function () {
     }
 
     /**
-    * You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
-    * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
+    * This function will sign a raw message using the identity coin type only.  Attempts to sign with FCT or EC addresses will
+    * be rejected by the device.
+    * @param path a path in BIP 32 format 
     * @param rawMessage this is the raw data Buffer to be signed
-    * @param tosha512 set this to true to has the rawMessage .
     * @example
     fct.signMessageRaw("44'/281'/0'/0/0", "The quick brown fox jumps over the lazy dog.").then(result => ...)
     */
@@ -357,9 +361,73 @@ var Fct = function () {
         var v = response.slice(32, 32 + 2).readUInt16BE(0);
         //signature
         var s = response.slice(34, 34 + v).toString('hex');
+        //const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+        //const h = response.slice(36 + v, 36 + v + l).toString('hex') 
+        return { v: v, k: k, s: s };
+      });
+    }
+
+    /**
+    * This function will sign a FAT 0 or 1 transaction using the Factoid Address.  
+    * @param path a path in BIP 32 format 
+    * @param fattype FAT protocol transaction type index 0: FAT-0, 1: FAT-1
+    * @param fattxraw this is the raw data fat transaction to be hashed then signed by device, Buffer.concat([index, timestamp, chainId, content])
+    * @example
+    fct.signFatTransaction("44'/131'/0'/0/0", "The quick brown fox jumps over the lazy dog.").then(result => ...)
+    */
+
+  }, {
+    key: "signFatTransaction",
+    value: function signFatTransaction(path, fattype, fattxbuffer) {
+      var _this6 = this;
+
+      var bipPath = _bip32Path2.default.fromString(path).toPathArray();
+      var offset = 0;
+      var p1 = 0;
+      var p2 = fattype;
+      if (p2 > 255 || p2 < 0) {
+        throw new Error("Invalid Transaction Type: FAT Transaction Type must be < 256 and >= 0");
+      }
+      var rawTx = fattxbuffer;
+      var toSend = [];
+      var response = void 0;
+
+      var _loop5 = function _loop5() {
+        var maxChunkSize = offset === 0 ? 150 - 1 - bipPath.length * 4 : 150;
+        var chunkSize = offset + maxChunkSize > rawTx.length ? rawTx.length - offset : maxChunkSize;
+        var buffer = new Buffer(offset === 0 ? 1 + bipPath.length * 4 + chunkSize : chunkSize);
+        if (offset === 0) {
+          buffer.writeInt8(bipPath.length, 0);
+          bipPath.forEach(function (segment, index) {
+            buffer.writeUInt32BE(segment, 1 + index * 4);
+          });
+          rawTx.copy(buffer, 1 + 4 * bipPath.length, offset, offset + chunkSize);
+        } else {
+          rawTx.copy(buffer, 0, offset, offset + chunkSize);
+        }
+        toSend.push(buffer);
+        offset += chunkSize;
+      };
+
+      while (offset !== rawTx.length) {
+        _loop5();
+      }
+      return (0, _utils.foreach)(toSend, function (data, i) {
+        return _this6.transport.send(0xe0, 0x20, i === 0 ? 0x00 : i === toSend.length - 1 ? 0x81 : 0x80, p2, data).then(function (apduResponse) {
+          response = apduResponse;
+        });
+      }).then(function () {
+
+        var k = response.slice(0, 32).toString('hex');
+        //length of signature should be 64
+        var v = response.slice(32, 32 + 2).readUInt16BE(0);
+        //signature
+        var s = response.slice(34, 34 + v).toString('hex');
         var l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+        //hash
         var h = response.slice(36 + v, 36 + v + l).toString('hex');
-        return { v: v, k: k, s: s, h: h };
+
+        return { k: k, s: s, h: h };
       });
     }
 

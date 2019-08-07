@@ -74,6 +74,12 @@
                       </a></li>
                       
                       <li><a
+                        href='#fctsignfattransaction'
+                        class='regular pre-open'>
+                        #signFatTransaction
+                      </a></li>
+                      
+                      <li><a
                         href='#fctgetappconfiguration'
                         class='regular pre-open'>
                         #getAppConfiguration
@@ -107,7 +113,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/f60fba54ca3c4d05d8327226a008abcfbad80db0/packages/hw-app-fct/src/Fct.js#L32-L418'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L31-L490'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -178,7 +184,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/f60fba54ca3c4d05d8327226a008abcfbad80db0/packages/hw-app-fct/src/Fct.js#L55-L119'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L54-L118'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -249,9 +255,9 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> fctaddr = <span class="hljs-keyword">await</span> fct.getAddress(<span class="hljs-string">"44'/131'/0'/0'/0'"</span>)
-<span class="hljs-keyword">const</span> ecaddr = <span class="hljs-keyword">await</span> fct.getAddress(<span class="hljs-string">"44'/132'/0'/0'/0'"</span>)
-<span class="hljs-keyword">const</span> idaddr = <span class="hljs-keyword">await</span> fct.getAddress(<span class="hljs-string">"44'/281'/0'/0'/0'"</span>)</pre>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> fctaddr = <span class="hljs-keyword">await</span> fct.getAddress(<span class="hljs-string">"44'/131'/0'/0/0"</span>)
+<span class="hljs-keyword">const</span> ecaddr = <span class="hljs-keyword">await</span> fct.getAddress(<span class="hljs-string">"44'/132'/0'/0/0"</span>)
+<span class="hljs-keyword">const</span> idaddr = <span class="hljs-keyword">await</span> fct.getAddress(<span class="hljs-string">"44'/281'/0'/0/0"</span>)</pre>
     
   
 
@@ -279,7 +285,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/f60fba54ca3c4d05d8327226a008abcfbad80db0/packages/hw-app-fct/src/Fct.js#L128-L177'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L127-L176'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -289,7 +295,7 @@
   <p>You can sign a transaction and retrieve v, r, s given the raw transaction and the BIP 32 path of the account to sign</p>
 
 
-  <div class='pre p1 fill-light mt0'>signTransaction(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rawTxHex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
+  <div class='pre p1 fill-light mt0'>signTransaction(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rawTxHex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
   
   
 
@@ -330,7 +336,7 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
     
   
 
@@ -340,7 +346,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> fct.signTransaction(<span class="hljs-string">"44'/131'/0'/0'/0'"</span>, <span class="hljs-string">"02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f"</span>)</pre>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> fct.signTransaction(<span class="hljs-string">"44'/131'/0'/0/0"</span>, <span class="hljs-string">"02016253dfaa7301010087db406ff65cb9dd72a1e99bcd51da5e03b0ccafc237dbf1318a8d7438e22371c892d6868d20f02894db071e2eb38fdc56c697caaeba7dc19bddae2c6e7084cc3120d667b49f"</span>)</pre>
     
   
 
@@ -368,7 +374,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/f60fba54ca3c4d05d8327226a008abcfbad80db0/packages/hw-app-fct/src/Fct.js#L187-L240'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L186-L238'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -378,7 +384,7 @@
   <p>You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign</p>
 
 
-  <div class='pre p1 fill-light mt0'>signCommit(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rawTxHex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, ischaincommit: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
+  <div class='pre p1 fill-light mt0'>signCommit(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rawTxHex: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, ischaincommit: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{k: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
   
   
 
@@ -428,7 +434,7 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{k: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
     
   
 
@@ -438,7 +444,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>fct.signCommit(<span class="hljs-string">"44'/132'/0'/0'/0"</span>, <span class="hljs-string">"00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00"</span>,<span class="hljs-literal">false</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
+      <pre class='p1 overflow-auto round fill-light'>fct.signCommit(<span class="hljs-string">"44'/132'/0'/0/0"</span>, <span class="hljs-string">"00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00"</span>,<span class="hljs-literal">false</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
     
   
 
@@ -466,17 +472,21 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/f60fba54ca3c4d05d8327226a008abcfbad80db0/packages/hw-app-fct/src/Fct.js#L250-L306'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L252-L309'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
   </div>
   
 
-  <p>You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign</p>
+  <p>You can sign an arbitrary message and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
+The message will be automatically hashed by the device using either sha256 (default) or sha512 if tosha512 is set to true.
+If coin types 131 or 132 are used "FCT Signed Message\n" or "EC Signed Message\n" is prepended to the message inside the ledger
+prior to the device hashing then signing the hash.  If the identity coin type 281 is used, then the message is directly hashed
+then signed by the ledger.</p>
 
 
-  <div class='pre p1 fill-light mt0'>signMessageHash(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rawMessage: <a href="https://nodejs.org/api/buffer.html">Buffer</a>, tosha512: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
+  <div class='pre p1 fill-light mt0'>signMessageHash(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rawMessage: <a href="https://nodejs.org/api/buffer.html">Buffer</a>, tosha512: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{k: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, h: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
   
   
 
@@ -512,7 +522,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>tosha512</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>)</code>
-	    set this to true to hash the rawMessage using sha512, the default is sha256.
+	    set this to true to hash the rawMessage using sha512, the default (or false) is sha256.
 
           </div>
           
@@ -526,7 +536,7 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{k: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, h: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
     
   
 
@@ -536,7 +546,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>fct.signMessageHash(<span class="hljs-string">"44'/281'/0'/0'/0"</span>, <span class="hljs-string">"The quick brown fox jumps over the lazy dog."</span>,<span class="hljs-literal">true</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
+      <pre class='p1 overflow-auto round fill-light'>fct.signMessageHash(<span class="hljs-string">"44'/281'/0'/0/0"</span>, <span class="hljs-string">"The quick brown fox jumps over the lazy dog."</span>,<span class="hljs-literal">true</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
     
   
 
@@ -564,7 +574,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/f60fba54ca3c4d05d8327226a008abcfbad80db0/packages/hw-app-fct/src/Fct.js#L317-L338'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L320-L341'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -642,7 +652,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>fct.signCommit(<span class="hljs-string">"44'/132'/0'/0'/0"</span>, <span class="hljs-string">"00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00"</span>,<span class="hljs-literal">false</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
+      <pre class='p1 overflow-auto round fill-light'>fct.storeChainId(<span class="hljs-string">"44'/132'/0'/0'/0"</span>, <span class="hljs-string">"00016227acddfe57cf6740c4f30ae39d71f75710fb4ea9c843d5c01755329a42ccab52034e1f7901d5b8efdb52a15c4007d341eb1193903a021ed7aaa9a3cf4234c32ef8a213de00"</span>,<span class="hljs-literal">false</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
     
   
 
@@ -660,7 +670,7 @@
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>signMessageRaw(path, rawMessage, tosha512)</span>
+            <span class='code strong strong truncate'>signMessageRaw(path, rawMessage)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -670,17 +680,18 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/f60fba54ca3c4d05d8327226a008abcfbad80db0/packages/hw-app-fct/src/Fct.js#L348-L402'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L351-L404'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
   </div>
   
 
-  <p>You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign</p>
+  <p>This function will sign a raw message using the identity coin type only.  Attempts to sign with FCT or EC addresses will
+be rejected by the device.</p>
 
 
-  <div class='pre p1 fill-light mt0'>signMessageRaw(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rawMessage: <a href="https://nodejs.org/api/buffer.html">Buffer</a>, tosha512: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, h: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
+  <div class='pre p1 fill-light mt0'>signMessageRaw(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rawMessage: <a href="https://nodejs.org/api/buffer.html">Buffer</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
   
   
 
@@ -698,7 +709,7 @@
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>path</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
+	    a path in BIP 32 format
 
           </div>
           
@@ -713,10 +724,109 @@
           
         </div>
       
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>fct.signMessageRaw(<span class="hljs-string">"44'/281'/0'/0/0"</span>, <span class="hljs-string">"The quick brown fox jumps over the lazy dog."</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='fctsignfattransaction'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>signFatTransaction(path, fattype, fattxbuffer, fattxraw)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L415-L475'>
+      <span>packages/hw-app-fct/src/Fct.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>This function will sign a FAT 0 or 1 transaction using the Factoid Address.</p>
+
+
+  <div class='pre p1 fill-light mt0'>signFatTransaction(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, fattype: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, fattxbuffer: <a href="https://nodejs.org/api/buffer.html">Buffer</a>, fattxraw: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>tosha512</span> <code class='quiet'>(any)</code>
-	    set this to true to has the rawMessage .
+            <span class='code bold'>path</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    a path in BIP 32 format
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fattype</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    FAT protocol transaction type index 0: FAT-0, 1: FAT-1
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fattxbuffer</span> <code class='quiet'>(<a href="https://nodejs.org/api/buffer.html">Buffer</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fattxraw</span> <code class='quiet'>(any)</code>
+	    this is the raw data fat transaction to be hashed then signed by device, Buffer.concat(
+[index, timestamp, chainId, content]
+)
 
           </div>
           
@@ -730,7 +840,7 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, h: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{s: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, v: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, r: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>
     
   
 
@@ -740,7 +850,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>fct.signMessageRaw(<span class="hljs-string">"44'/281'/0'/0/0"</span>, <span class="hljs-string">"The quick brown fox jumps over the lazy dog."</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
+      <pre class='p1 overflow-auto round fill-light'>fct.signFatTransaction(<span class="hljs-string">"44'/131'/0'/0/0"</span>, <span class="hljs-string">"The quick brown fox jumps over the lazy dog."</span>).then(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> ...)</pre>
     
   
 
@@ -768,7 +878,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/f60fba54ca3c4d05d8327226a008abcfbad80db0/packages/hw-app-fct/src/Fct.js#L407-L417'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/42a08637de5ece73a5f99f779d845b27366a267a/packages/hw-app-fct/src/Fct.js#L479-L489'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
