@@ -1,4 +1,4 @@
-// flow-typed signature: e9b8a312d6d244289753320d305d4186
+// flow-typed signature: 01e869652019c68c0e5edabaede45ab7
 // flow-typed version: <<STUB>>/webpack_v^4.20.2/flow_v0.66.0
 
 /**
@@ -911,6 +911,10 @@ declare module 'webpack/lib/optimize/MergeDuplicateChunksPlugin' {
 }
 
 declare module 'webpack/lib/optimize/MinChunkSizePlugin' {
+  declare module.exports: any;
+}
+
+declare module 'webpack/lib/optimize/MinMaxSizeWarning' {
   declare module.exports: any;
 }
 
@@ -1927,6 +1931,9 @@ declare module 'webpack/lib/optimize/MergeDuplicateChunksPlugin.js' {
 }
 declare module 'webpack/lib/optimize/MinChunkSizePlugin.js' {
   declare module.exports: $Exports<'webpack/lib/optimize/MinChunkSizePlugin'>;
+}
+declare module 'webpack/lib/optimize/MinMaxSizeWarning.js' {
+  declare module.exports: $Exports<'webpack/lib/optimize/MinMaxSizeWarning'>;
 }
 declare module 'webpack/lib/optimize/ModuleConcatenationPlugin.js' {
   declare module.exports: $Exports<'webpack/lib/optimize/ModuleConcatenationPlugin'>;
