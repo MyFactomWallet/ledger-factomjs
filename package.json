@@ -35,6 +35,7 @@
     "flow-mono-cli": "^1.5.0"
   },
   "dependencies": {
+    "@fat-token/fat-js": "^1.2.0",
     "budo": "^11.4.1",
     "documentation": "^6.0.0",
     "factom": "^0.3.6",
