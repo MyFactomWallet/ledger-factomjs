@@ -4,10 +4,10 @@
   "main": "index-browser.js",
   "license": "Apache-2.0",
   "dependencies": {
-    "@ledgerhq/hw-transport-u2f": "^4.24.0",
+    "@ledgerhq/hw-transport-u2f": "^4.70.0",
     "budo": "^11.0.1",
     "factom": "^0.3.6",
-    "@fat-token/fat-js":"^1.0.2",
+    "@fat-token/fat-js":"^1.2.0",
     "tweetnacl": "^1.0.0"
   },
   "devDependencies": {
