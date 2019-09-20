@@ -34,7 +34,7 @@ var testTokenChainId = '888888d027c59579fc47a6fc6c4a5c0409c7c39bc38a86cb5fc00699
 
 exports.default = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(transport) {
-    var fct, amount, path, addr, publicKey, toAddr, tx, extsig, txgood;
+    var fct, amount, path, addr, fromAddr, publicKey, toAddr, tx, extsig, txgood;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -47,13 +47,17 @@ exports.default = function () {
 
           case 5:
             addr = _context.sent;
+            fromAddr = addr.address;
             publicKey = Buffer.from(addr.publicKey, 'hex');
             toAddr = 'FA3nr5r54AKBZ9SLABS3JyRoGcWMVMTkePW9MECKM8shMg2pMagn';
-            tx = new TransactionBuilder(testTokenChainId).input(publicKey, amount).output(toAddr, amount).build();
-            _context.next = 11;
+            tx = new TransactionBuilder(testTokenChainId).input(fromAddr, amount).output(toAddr, amount).build();
+
+
+            console.log(tx._content);
+            _context.next = 13;
             return fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0).toString('hex'));
 
-          case 11:
+          case 13:
             extsig = _context.sent;
             txgood = new TransactionBuilder(tx).pkSignature(publicKey, Buffer.from(extsig['s'], 'hex')).build();
 
@@ -64,7 +68,7 @@ exports.default = function () {
 
             return _context.abrupt('return', result);
 
-          case 16:
+          case 18:
           case 'end':
             return _context.stop();
         }

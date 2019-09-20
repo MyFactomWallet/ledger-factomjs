@@ -14,15 +14,17 @@ export default async transport => {
   const amount = 150
   const path = "44'/131'/0'/0/0"
   const addr = await fct.getAddress(path)
+  const fromAddr = addr.address
   const publicKey = Buffer.from(addr.publicKey,'hex')
 
   const toAddr = 'FA3nr5r54AKBZ9SLABS3JyRoGcWMVMTkePW9MECKM8shMg2pMagn'
 
   let tx = new TransactionBuilder(testTokenChainId)
-    .input(publicKey, amount)
+    .input(fromAddr, amount)
     .output(toAddr, amount)
     .build()
 
+    console.log(tx._content)
   let extsig = await fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0).toString('hex'))
 
   let txgood = new TransactionBuilder(tx)
