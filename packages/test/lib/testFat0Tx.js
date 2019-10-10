@@ -54,10 +54,15 @@ exports.default = function () {
 
 
             console.log(tx._content);
-            _context.next = 13;
+            console.log("CONTENT TRANSACTION");
+            console.log(Buffer.from(tx._content).toString('hex'));
+            console.log("BEGIN WHOLE TRANSACTION");
+            console.log(tx.getMarshalDataSig(0).toString('hex'));
+            console.log("END WHOLE TRANSACTION");
+            _context.next = 18;
             return fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0).toString('hex'));
 
-          case 13:
+          case 18:
             extsig = _context.sent;
             txgood = new TransactionBuilder(tx).pkSignature(publicKey, Buffer.from(extsig['s'], 'hex')).build();
 
@@ -68,7 +73,7 @@ exports.default = function () {
 
             return _context.abrupt('return', result);
 
-          case 18:
+          case 23:
           case 'end':
             return _context.stop();
         }

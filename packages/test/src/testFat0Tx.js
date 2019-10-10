@@ -25,6 +25,11 @@ export default async transport => {
     .build()
 
     console.log(tx._content)
+    console.log("CONTENT TRANSACTION")
+    console.log(Buffer.from(tx._content).toString('hex'))
+    console.log("BEGIN WHOLE TRANSACTION")
+    console.log(tx.getMarshalDataSig(0).toString('hex'))
+    console.log("END WHOLE TRANSACTION")
   let extsig = await fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0).toString('hex'))
 
   let txgood = new TransactionBuilder(tx)
