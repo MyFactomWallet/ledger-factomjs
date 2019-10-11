@@ -60,7 +60,7 @@ exports.default = function () {
             console.log(tx.getMarshalDataSig(0).toString('hex'));
             console.log("END WHOLE TRANSACTION");
             _context.next = 18;
-            return fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0).toString('hex'));
+            return fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0));
 
           case 18:
             extsig = _context.sent;
