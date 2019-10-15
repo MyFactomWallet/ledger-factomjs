@@ -22,8 +22,8 @@ function expectAppContext(appName) {
 
 var tests = [
   expectAppContext("Factom (fct)"),
-  { name: "testFat0Tx", run: testFat0Tx },
   { name: "testFat1Tx", run: testFat1Tx },
+  { name: "testFat0Tx", run: testFat0Tx },
   { name: "testFctAddr", run: testFctAddr },
   { name: "testFctAddrDisplay", run: testFctAddrDisplay },
   { name: "testFctECAddr", run: testFctECAddr },

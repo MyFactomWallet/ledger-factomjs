@@ -2,6 +2,8 @@ import Fct from '@factoid.org/hw-app-fct'
 const { Transaction} = require( 'factom/src/transaction' )
 const { FactomCli } = require('factom/src/factom-cli')
 const nacl = require('tweetnacl/nacl-fast').sign
+const assert = require('chai').assert;
+const fctUtil = require('factom/src/util');
 
 const Entry = require('factom/src/entry').Entry;
 
@@ -24,21 +26,26 @@ export default async transport => {
     .output(toAddr, amount)
     .build()
 
-    console.log(tx._content)
-    console.log("CONTENT TRANSACTION")
-    console.log(Buffer.from(tx._content).toString('hex'))
-    console.log("BEGIN WHOLE TRANSACTION")
-    console.log(tx.getMarshalDataSig(0).toString('hex'))
-    console.log("END WHOLE TRANSACTION")
-    let extsig = await fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0))
+  console.log(tx._content)
+  console.log("CONTENT TRANSACTION")
+  console.log(Buffer.from(tx._content).toString('hex'))
+  console.log("BEGIN WHOLE TRANSACTION")
+  console.log(tx.getMarshalDataSig(0).toString('hex'))
+  console.log("END WHOLE TRANSACTION")
+  let extsig = await fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0))
 
   let txgood = new TransactionBuilder(tx)
-    .pkSignature(publicKey, Buffer.from(extsig['s'],'hex') )
+    .pkSignature(extsig.publicKey, Buffer.from(extsig.signature,'hex') )
     .build()
 
-  txgood.validateSignatures()
+  let testhash = fctUtil.sha512(tx.getMarshalDataSig(0))
+  console.log("hash")
+  console.log(extsig.hash)
+  console.log(testhash.toString('hex'))
+  assert.isTrue(txgood.validateSignatures())
+  assert.isTrue(testhash.toString('hex') === extsig.hash)
 
   console.log(txgood)
 
-  return result
+  return extsig
 }

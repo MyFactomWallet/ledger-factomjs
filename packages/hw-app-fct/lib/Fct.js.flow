@@ -431,7 +431,6 @@ export default class Fct {
     let rawTx = fattxbuffer
     let toSend = []
     let response
-
     while (offset !== rawTx.length) {
       let maxChunkSize = offset === 0 ? 150 - 1 - bipPath.length * 4 : 150;
       let chunkSize =
@@ -461,16 +460,30 @@ export default class Fct {
         })
     ).then(() => {
       
-      const k = response.slice(0, 32).toString('hex')
+      //const k = response.slice(0, 32).toString('hex')
       //length of signature should be 64
-      const v = response.slice(32, 32 + 2).readUInt16BE(0)
+      //const v = response.slice(32, 32 + 2).readUInt16BE(0)
       //signature
-      const s = response.slice(34, 34 + v ).toString('hex')
-      const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+      //const s = response.slice(34, 34 + v ).toString('hex')
+      //const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
       //hash
-      const h = response.slice(36 + v, 36 + v + l).toString('hex')
 
-      return { k, s, h }
+      
+      const rcdType = response.slice(0, 1).toString('hex')
+      const publicKey = response.slice(1, 33).toString('hex')
+      //length of signature should be 64
+      const v = response.slice(33, 33 + 2).readUInt16BE(0)
+      //signature
+      const signature = response.slice(35, 35 + v ).toString('hex')
+      
+      //hash
+      //const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+      //const l = response.slice(36, 36 + v).readUInt16BE(0)
+      const hash = response.slice(35 + v, 35 + v + 64 ).toString('hex')
+      return { rcdType, publicKey, signature, hash }
+      
+      
+      //return { k, s, h }
     })
   }
   

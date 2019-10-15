@@ -25,6 +25,8 @@ var _require2 = require('factom/src/factom-cli'),
     FactomCli = _require2.FactomCli;
 
 var nacl = require('tweetnacl/nacl-fast').sign;
+var assert = require('chai').assert;
+var fctUtil = require('factom/src/util');
 
 var Entry = require('factom/src/entry').Entry;
 
@@ -34,7 +36,7 @@ var testTokenChainId = '888888d027c59579fc47a6fc6c4a5c0409c7c39bc38a86cb5fc00699
 
 exports.default = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(transport) {
-    var fct, amount, path, addr, fromAddr, publicKey, toAddr, tx, extsig, txgood;
+    var fct, amount, path, addr, fromAddr, publicKey, toAddr, tx, extsig, txgood, testhash;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -64,16 +66,20 @@ exports.default = function () {
 
           case 18:
             extsig = _context.sent;
-            txgood = new TransactionBuilder(tx).pkSignature(publicKey, Buffer.from(extsig['s'], 'hex')).build();
+            txgood = new TransactionBuilder(tx).pkSignature(extsig.publicKey, Buffer.from(extsig.signature, 'hex')).build();
+            testhash = fctUtil.sha512(tx.getMarshalDataSig(0));
 
-
-            txgood.validateSignatures();
+            console.log("hash");
+            console.log(extsig.hash);
+            console.log(testhash.toString('hex'));
+            assert.isTrue(txgood.validateSignatures());
+            assert.isTrue(testhash.toString('hex') === extsig.hash);
 
             console.log(txgood);
 
-            return _context.abrupt('return', result);
+            return _context.abrupt('return', extsig);
 
-          case 23:
+          case 28:
           case 'end':
             return _context.stop();
         }

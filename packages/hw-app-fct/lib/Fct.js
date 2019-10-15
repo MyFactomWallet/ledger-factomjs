@@ -418,16 +418,30 @@ var Fct = function () {
         });
       }).then(function () {
 
-        var k = response.slice(0, 32).toString('hex');
+        //const k = response.slice(0, 32).toString('hex')
         //length of signature should be 64
-        var v = response.slice(32, 32 + 2).readUInt16BE(0);
+        //const v = response.slice(32, 32 + 2).readUInt16BE(0)
         //signature
-        var s = response.slice(34, 34 + v).toString('hex');
-        var l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+        //const s = response.slice(34, 34 + v ).toString('hex')
+        //const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
         //hash
-        var h = response.slice(36 + v, 36 + v + l).toString('hex');
 
-        return { k: k, s: s, h: h };
+
+        var rcdType = response.slice(0, 1).toString('hex');
+        var publicKey = response.slice(1, 33).toString('hex');
+        //length of signature should be 64
+        var v = response.slice(33, 33 + 2).readUInt16BE(0);
+        //signature
+        var signature = response.slice(35, 35 + v).toString('hex');
+
+        //hash
+        //const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
+        //const l = response.slice(36, 36 + v).readUInt16BE(0)
+        var hash = response.slice(35 + v, 35 + v + 64).toString('hex');
+        return { rcdType: rcdType, publicKey: publicKey, signature: signature, hash: hash
+
+          //return { k, s, h }
+        };
       });
     }
 

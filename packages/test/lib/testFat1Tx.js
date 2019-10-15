@@ -25,16 +25,18 @@ var _require2 = require('factom/src/factom-cli'),
     FactomCli = _require2.FactomCli;
 
 var nacl = require('tweetnacl/nacl-fast').sign;
+var assert = require('chai').assert;
+var fctUtil = require('factom/src/util');
 
 var Entry = require('factom/src/entry').Entry;
 
-var TransactionBuilder = require('@fat-token/fat-js/0/TransactionBuilder');
+var TransactionBuilder = require('@fat-token/fat-js/1/TransactionBuilder');
 
 var testTokenChainId = '888888d027c59579fc47a6fc6c4a5c0409c7c39bc38a86cb5fc0069978493762';
 
 exports.default = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(transport) {
-    var fct, amount, path, addr, publicKey, toAddr, tx, extsig, txgood;
+    var fct, amount, path, addr, fromAddr, publicKey, toAddr, meta, tx, extsig, txgood, testhash;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -47,24 +49,41 @@ exports.default = function () {
 
           case 5:
             addr = _context.sent;
+            fromAddr = addr.address;
             publicKey = Buffer.from(addr.publicKey, 'hex');
             toAddr = 'FA3nr5r54AKBZ9SLABS3JyRoGcWMVMTkePW9MECKM8shMg2pMagn';
-            tx = new TransactionBuilder(testTokenChainId).input(publicKey, [{ min: 0, max: 3 }, 150]).output(toAddr, [{ min: 0, max: 3 }, 150]).build();
-            _context.next = 11;
-            return fct.signFatTransaction(path, 1, tx.getMarshalDataSig(0).toString('hex'));
 
-          case 11:
+            //test metadata
+
+            meta = { type: 'fat-js test run', timestamp: new Date().getTime() };
+            tx = new TransactionBuilder(testTokenChainId).input(fromAddr, [10]).output(toAddr, [10]).metadata(meta).build();
+
+
+            console.log(tx._content);
+            console.log("CONTENT TRANSACTION");
+            console.log(Buffer.from(tx._content).toString('hex'));
+            console.log("BEGIN WHOLE TRANSACTION");
+            console.log(tx.getMarshalDataSig(0).toString('hex'));
+            console.log("END WHOLE TRANSACTION");
+            _context.next = 19;
+            return fct.signFatTransaction(path, 1, tx.getMarshalDataSig(0));
+
+          case 19:
             extsig = _context.sent;
-            txgood = new TransactionBuilder(tx).pkSignature(publicKey, Buffer.from(extsig['s'], 'hex')).build();
+            txgood = new TransactionBuilder(tx).pkSignature(extsig.publicKey, Buffer.from(extsig.signature, 'hex')).build();
+            testhash = fctUtil.sha512(tx.getMarshalDataSig(0));
 
-
-            txgood.validateSignatures();
+            console.log("hash");
+            console.log(extsig.hash);
+            console.log(testhash.toString('hex'));
+            assert.isTrue(txgood.validateSignatures());
+            assert.isTrue(testhash.toString('hex') === extsig.hash);
 
             console.log(txgood);
 
-            return _context.abrupt('return', result);
+            return _context.abrupt('return', extsig);
 
-          case 16:
+          case 29:
           case 'end':
             return _context.stop();
         }
