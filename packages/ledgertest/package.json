@@ -1,13 +1,13 @@
 {
   "name": "@factoid.org/ledger-test-browser",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "main": "index-browser.js",
   "license": "Apache-2.0",
   "dependencies": {
+    "@fat-token/fat-js": "^1.2.0",
     "@ledgerhq/hw-transport-u2f": "^4.70.0",
     "budo": "^11.0.1",
     "factom": "^0.3.6",
-    "@fat-token/fat-js":"^1.2.0",
     "tweetnacl": "^1.0.0"
   },
   "devDependencies": {
