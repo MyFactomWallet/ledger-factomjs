@@ -1,6 +1,6 @@
 {
   "name": "@factoid.org/ledger-test-browser",
-  "version": "0.7.0",
+  "version": "0.7.3",
   "main": "index-browser.js",
   "license": "Apache-2.0",
   "dependencies": {
