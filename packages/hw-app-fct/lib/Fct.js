@@ -146,16 +146,20 @@ var Fct = function () {
       }).then(function () {
 
         var r = response.slice(0, 33).toString('hex');
+        var rcdType = response.slice(0, 1).toString('hex');
+        var publicKey = response.slice(1, 33).toString('hex');
+
         //length of signature should be 64
         var v = response.slice(33, 33 + 2).readUInt16BE(0);
         //signature
         var s = response.slice(35, 35 + v).toString('hex');
-        return { v: v, r: r, s: s };
+        var signature = s;
+        return { v: v, r: r, s: s, rcdType: rcdType, publicKey: publicKey, signature: signature };
       });
     }
 
     /**
-     * You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
+     * You can sign an entry or chain commit and retrieve publicKey(k) and signature(s) given the raw transaction and the BIP 32 path of the account to sign
      * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
      * @param rawTxHex this is the ledger for a entry or chain commit
      * @param ischaincommit set this to true if the rawTxHex is a chain commit ledger.
@@ -208,7 +212,9 @@ var Fct = function () {
         var v = response.slice(32, 32 + 2).readUInt16BE(0);
         //signature
         var s = response.slice(34, 34 + v).toString('hex');
-        return { k: k, s: s };
+        var publicKey = k;
+        var signature = s;
+        return { k: k, s: s, publicKey: publicKey, signature: signature };
       });
     }
 
@@ -273,7 +279,10 @@ var Fct = function () {
         //hash
         var h = response.slice(36 + v, 36 + v + l).toString('hex');
 
-        return { k: k, s: s, h: h };
+        var publicKey = k;
+        var signature = s;
+        var hash = h;
+        return { k: k, s: s, h: h, publicKey: publicKey, signature: signature, hash: hash };
       });
     }
 
@@ -363,7 +372,9 @@ var Fct = function () {
         var s = response.slice(34, 34 + v).toString('hex');
         //const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
         //const h = response.slice(36 + v, 36 + v + l).toString('hex') 
-        return { v: v, k: k, s: s };
+        var publicKey = k;
+        var signature = s;
+        return { v: v, k: k, s: s, publicKey: publicKey, signature: signature };
       });
     }
 

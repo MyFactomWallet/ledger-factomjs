@@ -167,16 +167,20 @@ export default class Fct {
     ).then(() => {
       
       const r = response.slice(0, 33).toString('hex')
+      const rcdType = response.slice(0, 1).toString('hex')
+      const publicKey = response.slice(1, 33).toString('hex')
+
       //length of signature should be 64
       const v = response.slice(33, 33 + 2).readUInt16BE(0)
       //signature
       const s = response.slice(35, 35 + v ).toString('hex')
-      return { v, r, s }
+      let signature = s
+      return { v, r, s, rcdType, publicKey, signature }
     });
   }
 
   /**
-   * You can sign an entry or chain commit and retrieve v, k, s given the raw transaction and the BIP 32 path of the account to sign
+   * You can sign an entry or chain commit and retrieve publicKey(k) and signature(s) given the raw transaction and the BIP 32 path of the account to sign
    * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
    * @param rawTxHex this is the ledger for a entry or chain commit
    * @param ischaincommit set this to true if the rawTxHex is a chain commit ledger.
@@ -233,7 +237,9 @@ export default class Fct {
       const v = response.slice(32, 32 + 2).readUInt16BE(0)
       //signature
       const s = response.slice(34, 34 + v ).toString('hex')
-      return { k, s }
+      let publicKey = k
+      let signature = s
+      return { k, s, publicKey, signature }
     })
   }
 
@@ -304,7 +310,10 @@ export default class Fct {
       //hash
       const h = response.slice(36 + v, 36 + v + l).toString('hex')
 
-      return { k, s, h }
+      let publicKey = k
+      let signature = s
+      let hash = h
+      return { k, s, h, publicKey, signature, hash }
     })
   }
 
@@ -399,7 +408,9 @@ export default class Fct {
       const s = response.slice(34, 34 + v ).toString('hex')
       //const l = response.slice(34 + v, 34 + v + 2).readUInt8(0);
       //const h = response.slice(36 + v, 36 + v + l).toString('hex') 
-      return { v, k, s }
+      let publicKey = k
+      let signature = s
+      return { v, k, s, publicKey, signature }
     })
   }
 

@@ -1,4 +1,4 @@
-// flow-typed signature: 53739f6d355a1ab777a7883853e4e52d
+// flow-typed signature: fa8d97f868ca20eb7160f450d3452b43
 // flow-typed version: <<STUB>>/@babel/plugin-transform-runtime_v^7.1.0/flow_v0.66.0
 
 /**
@@ -22,7 +22,7 @@ declare module '@babel/plugin-transform-runtime' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module '@babel/plugin-transform-runtime/lib/helpers' {
+declare module '@babel/plugin-transform-runtime/lib/definitions' {
   declare module.exports: any;
 }
 
@@ -30,24 +30,10 @@ declare module '@babel/plugin-transform-runtime/lib/index' {
   declare module.exports: any;
 }
 
-declare module '@babel/plugin-transform-runtime/lib/runtime-corejs2-definitions' {
-  declare module.exports: any;
-}
-
-declare module '@babel/plugin-transform-runtime/lib/runtime-corejs3-definitions' {
-  declare module.exports: any;
-}
-
 // Filename aliases
-declare module '@babel/plugin-transform-runtime/lib/helpers.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib/helpers'>;
+declare module '@babel/plugin-transform-runtime/lib/definitions.js' {
+  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib/definitions'>;
 }
 declare module '@babel/plugin-transform-runtime/lib/index.js' {
   declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib/index'>;
-}
-declare module '@babel/plugin-transform-runtime/lib/runtime-corejs2-definitions.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib/runtime-corejs2-definitions'>;
-}
-declare module '@babel/plugin-transform-runtime/lib/runtime-corejs3-definitions.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib/runtime-corejs3-definitions'>;
 }
