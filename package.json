@@ -12,6 +12,7 @@
     "test": "yarn run build && lerna run test && yarn run lint && yarn run flow && yarn run prettier-diff",
     "test-id": "cd packages/test && yarn run test-id",
     "test-tx-mult": "cd packages/test && yarn run test-tx-mult",
+    "test-tx": "cd packages/test && yarn run test-tx",
     "test-node": "cd packages/test && yarn run test-node",
     "test-browser": "cd packages/test && yarn run test-browser",
     "ledgertest-browser": "cd packages/ledgertest && yarn run ledgertest-browser",
@@ -37,7 +38,7 @@
   "dependencies": {
     "budo": "^11.4.1",
     "documentation": "^6.0.0",
-    "factom": "^0.3.6",
+    "factom": "^1.2.7",
     "node-hid": "^0.7.2"
   }
 }

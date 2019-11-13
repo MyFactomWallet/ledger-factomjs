@@ -24,19 +24,9 @@ function expectAppContext(appName) {
 var tests = [
   expectAppContext("Factom (fct)"),
   { name: "testFctEcTx", run: testFctEcTx },
-  { name: "testFat1Tx", run: testFat1Tx },
-  { name: "testFat0Tx", run: testFat0Tx },
-  { name: "testFctAddr", run: testFctAddr },
-  { name: "testFctAddrDisplay", run: testFctAddrDisplay },
-  { name: "testFctECAddr", run: testFctECAddr },
   { name: "testFctTx", run: testFctTx },
-  { name: "testFctEntryCommit", run: testFctEntryCommit },
-  { name: "testFctChainCommit", run: testFctChainCommit },
-  { name: "testFctAppConfig", run: testFctAppConfig },
-  { name: "testFctAddrPath", run: testFctAddrPath },
-  { name: "testFctIdHashSign", run: testFctIdHashSign },
-  { name: "testFctIdAddr", run: testFctIdAddr },
-  { name: "testFctTxMultiOut", run: testFctTxMultiOut },
+  { name: "testFat1Tx", run: testFat1Tx },
+  { name: "testFat0Tx", run: testFat0Tx }
 ];
 
 const defaultWaitForAppSwitch = step =>
