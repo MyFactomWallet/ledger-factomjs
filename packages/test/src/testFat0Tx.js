@@ -19,6 +19,9 @@ export default async transport => {
   const fromAddr = addr.address
   const publicKey = Buffer.from(addr.publicKey,'hex')
 
+  console.log("== Ledger address ==")
+  console.log(addr)
+  console.log("====================")
   const toAddr = 'FA3nr5r54AKBZ9SLABS3JyRoGcWMVMTkePW9MECKM8shMg2pMagn'
 
   let tx = new TransactionBuilder(testTokenChainId)

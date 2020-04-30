@@ -12,6 +12,7 @@ import testFat0Tx from "./testFat0Tx";
 import testFat1Tx from "./testFat1Tx";
 import testFctTxMultiOut from "./testFctTxMultiOut";
 import testFctEcTx from "./testFctEcTx.js";
+import testPeg from "./testPeg.js";
 
 function expectAppContext(appName) {
   // TODO improve this by waiting user to do an action?
@@ -23,6 +24,7 @@ function expectAppContext(appName) {
 
 var tests = [
   expectAppContext("Factom (fct)"),
+  { name: "testPeg", run: testPeg },
   { name: "testFctEcTx", run: testFctEcTx },
   { name: "testFctTx", run: testFctTx },
   { name: "testFat1Tx", run: testFat1Tx },

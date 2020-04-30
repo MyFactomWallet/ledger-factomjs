@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>@factoid.org/* 0.7.5 | Documentation</title>
+  <title>@factoid.org/* 0.7.6 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>@factoid.org/*</h3>
-          <div class='mb1'><code>0.7.5</code></div>
+          <div class='mb1'><code>0.7.6</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -113,7 +113,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L31-L514'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L31-L516'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -184,7 +184,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L54-L118'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L54-L120'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -194,7 +194,7 @@
   <p>get Factom address for a given BIP 32 path.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getAddress(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, boolDisplay: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, boolChainCode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{publicKey: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, address: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chaincode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chainid: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
+  <div class='pre p1 fill-light mt0'>getAddress(path: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, boolDisplay: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>, boolChainCode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{rcd: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, publicKey: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, address: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chaincode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chainid: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></div>
   
   
 
@@ -242,8 +242,8 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{publicKey: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, address: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chaincode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chainid: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>:
-        an object with a publicKey and address with optional chainCode and chainid
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;{rcd: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, publicKey: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, address: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chaincode: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chainid: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>}></code>:
+        an object with a rct, publicKey, and address with optional chainCode and chainid
 
       
     
@@ -285,7 +285,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L127-L180'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L129-L182'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -374,7 +374,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L190-L244'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L192-L246'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -472,7 +472,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L258-L318'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L260-L320'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -574,7 +574,7 @@ then signed by the ledger.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L329-L350'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L331-L352'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -680,7 +680,7 @@ then signed by the ledger.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L360-L415'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L362-L417'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -770,7 +770,7 @@ be rejected by the device.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L426-L499'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L428-L501'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     
@@ -878,7 +878,7 @@ be rejected by the device.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/a875c7f6424038a382ac810a6155947bbbccb552/packages/hw-app-fct/src/Fct.js#L503-L513'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/MyFactomWallet/ledger-factomjs/blob/aa1e86e72b6566e25627ea931ce0f824bdbea385/packages/hw-app-fct/src/Fct.js#L505-L515'>
       <span>packages/hw-app-fct/src/Fct.js</span>
       </a>
     

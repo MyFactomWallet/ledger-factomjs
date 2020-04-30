@@ -72,6 +72,10 @@ var _testFctEcTx = require("./testFctEcTx.js");
 
 var _testFctEcTx2 = _interopRequireDefault(_testFctEcTx);
 
+var _testPeg = require("./testPeg.js");
+
+var _testPeg2 = _interopRequireDefault(_testPeg);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function expectAppContext(appName) {
@@ -82,7 +86,7 @@ function expectAppContext(appName) {
   };
 }
 
-var tests = [expectAppContext("Factom (fct)"), { name: "testFctEcTx", run: _testFctEcTx2.default }, { name: "testFctTx", run: _testFctTx2.default }, { name: "testFat1Tx", run: _testFat1Tx2.default }, { name: "testFat0Tx", run: _testFat0Tx2.default }];
+var tests = [expectAppContext("Factom (fct)"), { name: "testPeg", run: _testPeg2.default }, { name: "testFctEcTx", run: _testFctEcTx2.default }, { name: "testFctTx", run: _testFctTx2.default }, { name: "testFat1Tx", run: _testFat1Tx2.default }, { name: "testFat0Tx", run: _testFat0Tx2.default }];
 
 var defaultWaitForAppSwitch = function defaultWaitForAppSwitch(step) {
   return new _promise2.default(function (resolve) {

@@ -56,7 +56,7 @@ var Fct = function () {
    * get Factom address for a given BIP 32 path.
    * @param path a path in BIP 32 format (note: all paths muth be hardened (e.g. .../0'/0' )
    * @option boolDisplay if true, optionally display the address on the device 
-   * @return an object with a publicKey and address with optional chainCode and chainid
+   * @return an object with a rct, publicKey, and address with optional chainCode and chainid
    * @example
    * const fctaddr = await fct.getAddress("44'/131'/0'/0/0")
    * const ecaddr = await fct.getAddress("44'/132'/0'/0/0")
@@ -80,7 +80,8 @@ var Fct = function () {
         var result = {};
         var publicKeyLength = response[0];
         var addressLength = response[1 + publicKeyLength];
-        result.publicKey = response.slice(1, 1 + publicKeyLength).toString("hex");
+        result.rcd = response.slice(1, 1 + publicKeyLength).toString("hex");
+        result.publicKey = Buffer.from(result.rcd, 'hex').slice(1);
         result.address = response.slice(1 + publicKeyLength + 1, 1 + publicKeyLength + 1 + addressLength).toString("ascii");
         var chainidstart = 0;
         result.chaincode = "";

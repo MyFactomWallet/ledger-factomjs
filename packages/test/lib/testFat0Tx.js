@@ -51,6 +51,11 @@ exports.default = function () {
             addr = _context.sent;
             fromAddr = addr.address;
             publicKey = Buffer.from(addr.publicKey, 'hex');
+
+
+            console.log("== Ledger address ==");
+            console.log(addr);
+            console.log("====================");
             toAddr = 'FA3nr5r54AKBZ9SLABS3JyRoGcWMVMTkePW9MECKM8shMg2pMagn';
             tx = new TransactionBuilder(testTokenChainId).input(fromAddr, amount).output(toAddr, amount).build();
 
@@ -61,10 +66,10 @@ exports.default = function () {
             console.log("BEGIN WHOLE TRANSACTION");
             console.log(tx.getMarshalDataSig(0).toString('hex'));
             console.log("END WHOLE TRANSACTION");
-            _context.next = 18;
+            _context.next = 21;
             return fct.signFatTransaction(path, 0, tx.getMarshalDataSig(0));
 
-          case 18:
+          case 21:
             extsig = _context.sent;
             txgood = new TransactionBuilder(tx).pkSignature(extsig.publicKey, Buffer.from(extsig.signature, 'hex')).build();
             testhash = fctUtil.sha512(tx.getMarshalDataSig(0));
@@ -79,7 +84,7 @@ exports.default = function () {
 
             return _context.abrupt('return', extsig);
 
-          case 28:
+          case 31:
           case 'end':
             return _context.stop();
         }
